@@ -498,6 +498,15 @@ button, input, select, textarea {
   transform: translateY(0);
 }
 
+/* ضمان ظهور كامل المحتوى على الهواتف والشاشات الصغيرة بدون تعليق */
+@media (max-width: 768px) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* تأخير متتابع (Stagger delays) */
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
