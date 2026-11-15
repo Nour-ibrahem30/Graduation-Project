@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fbf9f5" />
+  <title>غُرْزَة — لحظة ونكون جاهزين</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body{min-height:100vh;display:grid;place-items:center;background:#fbf9f5;color:#1b1c1a}
+    .loading-card{width:min(420px,calc(100% - 40px));text-align:center}
+    .loading-mark{width:58px;height:58px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:#98440b;color:white;font-size:26px;font-weight:800;animation:breathe 1.2s ease-in-out infinite alternate}
+    .loading-card h1{font-size:23px;margin:0 0 7px;color:#98440b}
+    .loading-card p{font-size:12px;color:#77766e;margin:0 0 24px}
+    .loading-track{height:5px;overflow:hidden;background:#e7e3da;border-radius:5px}
+    .loading-track span{display:block;width:35%;height:100%;background:#b85c24;border-radius:5px;animation:travel 1.2s ease-in-out infinite alternate}
+    @keyframes travel{from{transform:translateX(185%)}to{transform:translateX(-20%)}}
+    @keyframes breathe{to{transform:scale(1.06);opacity:.82}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+  </style>
+</head>
+<body>
+  <main class="loading-card" aria-live="polite">
+    <div class="loading-mark" aria-hidden="true">غ</div>
+    <h1>غُرْزَة</h1>
+    <p>بنجهّزلك تجربة تسوّق لطيفة</p>
+    <div class="loading-track" role="progressbar" aria-label="جاري التحميل"><span></span></div>
+  </main>
+  <script>window.setTimeout(() => { window.location.href = 'index.html'; }, 900);</script>
+</body>
+</html>

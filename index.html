@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>غُـرْزَة | Ghorza Craft Studio — متجر الحرف والمشغولات اليدوية المصرية</title>
+  <meta name="description" content="متجر غرزة للأعمال اليدوية المصرية: تطريز يدوي، كروشيه وتريكو، طارات هدايا، إكسسوارات خرز، وفن الريزن." />
+  
+  <!-- الخطوط والأيقونات -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS & Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-[#fbf9f5] text-[#1b1c1a] antialiased">
+
+  <!-- ==================== شاشة التحميل التفاعلية الأولية (Atelier Preloader) ==================== -->
+  <div id="atelier-preloader">
+    <div class="flex flex-col items-center max-w-sm text-center">
+      <!-- شعار المتجر -->
+      <div class="w-16 h-16 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-2xl shadow-xl font-display mb-4 animate-bounce">
+        غ
+      </div>
+      <h2 class="font-display font-extrabold text-2xl text-[#98440b] tracking-tight mb-1">أتيليه غُـرْزَة</h2>
+      <span class="text-[11px] text-[#897268] font-semibold mb-3 tracking-wide">صناعة يدوية مصرية أصيلة</span>
+      <p id="preloader-stage" class="text-xs text-[#1b1c1a] font-bold min-h-[1.5rem] mb-4 transition-all">جاري تجهيز الخامات الطبيعية...</p>
+
+      <!-- شريط التحميل التكتيلي -->
+      <div class="w-64 h-3 bg-[#e4e2de] rounded-full p-0.5 relative overflow-hidden border border-[#dcc1b5] mb-2 shadow-inner">
+        <div id="preloader-fill" class="h-full bg-gradient-to-r from-[#98440b] to-[#b85c24] rounded-full transition-all duration-150" style="width: 0%;"></div>
+      </div>
+      <div class="flex items-center gap-1 text-xs font-bold text-[#897268]">
+        <span id="preloader-percentage">0</span>%
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== الشريط العلوي ==================== -->
+  <aside class="bg-[#b85c24] text-white text-xs font-semibold py-2 px-4 text-center tracking-wide flex flex-wrap items-center justify-center gap-2">
+    <span>✨ شحن مجاني لكافة محافظات مصر للطلبات فوق 1,500 ج.م</span>
+    <span class="opacity-60 hidden sm:inline">•</span>
+    <span class="hidden sm:inline">دفع عند الاستلام وإنستاباي</span>
+    <span class="opacity-60 hidden md:inline">•</span>
+    <span class="hidden md:inline">تطريز وحفر مجاني للأسماء</span>
+    <span class="opacity-60">•</span>
+    <a href="loading.html" class="inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 text-white px-2 py-0.5 rounded-full transition-colors text-[11px]">
+      <span class="material-symbols-outlined text-[14px]">autorenew</span>
+      <span>شاشة التحميل الحرفية</span>
+    </a>
+  </aside>
+
+  <!-- ==================== الهيدر الرئيسي ==================== -->
+  <header class="sticky top-0 z-40 bg-[#fbf9f5]/90 backdrop-blur-md border-b border-[#e8e4dc] transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- اللوجو والهوية -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-xl shadow-sm group-hover:scale-105 transition-transform font-display">
+          غ
+        </div>
+        <div class="flex flex-col text-right">
+          <span class="font-display font-extrabold text-2xl text-[#98440b] tracking-tight leading-none">غُـرْزَة</span>
+          <span class="text-[11px] text-[#55433a] font-medium mt-0.5">مشغولات يدوية مصرية أصيلة</span>
+        </div>
+      </a>
+
+      <!-- روابط التنقل -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-[#55433a]">
+        <a href="index.html" class="text-[#98440b] font-bold">الرئيسية</a>
+        <a href="products.html" class="hover:text-[#98440b] transition-colors">المجموعة الكاملة</a>
+        <a href="products.html?craft=embroidery" class="hover:text-[#98440b] transition-colors">تطريز يدوي</a>
+        <a href="products.html?craft=crochet" class="hover:text-[#98440b] transition-colors">كروشيه وتريكو</a>
+        <a href="products.html?craft=resin" class="hover:text-[#98440b] transition-colors">فن الريزن</a>
+        <a href="products.html?craft=beaded" class="hover:text-[#98440b] transition-colors">إكسسوارات خرز</a>
+        <a href="craft-story.html" class="hover:text-[#98440b] transition-colors">حكاية الصنعة</a>
+      </nav>
+
+      <!-- أدوات الهيدر (بحث، مفضلة، سلة) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- زر فتح البحث السريع -->
+        <a href="products.html" aria-label="البحث" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-700 hover:bg-[#efeeea] transition-colors">
+          <span class="material-symbols-outlined text-[20px]">search</span>
+        </a>
+
+        <!-- زر المفضلة -->
+        <a href="products.html" aria-label="المفضلة" class="relative w-10 h-10 rounded-full flex items-center justify-center text-gray-700 hover:bg-[#efeeea] transition-colors">
+          <span class="material-symbols-outlined text-[20px]">favorite</span>
+          <span class="wishlist-count-badge absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-600 text-white text-[10px] items-center justify-center font-bold" style="display: none;">0</span>
+        </a>
+
+        <!-- زر السلة التفاعلي -->
+        <button onclick="GhorzaApp.openCartDrawer()" class="flex items-center gap-2 bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#1b1c1a] px-3.5 py-2 rounded-xl transition-all shadow-sm border border-[#e8e4dc]">
+          <span class="material-symbols-outlined text-[20px] text-[#98440b]">shopping_bag</span>
+          <span class="text-xs font-bold hidden sm:inline">السلة</span>
+          <span class="cart-count-badge bg-[#98440b] text-white text-xs px-2 py-0.5 rounded-full font-bold" style="display: none;">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== 1. HERO SECTION ==================== -->
+  <section class="relative overflow-hidden pt-8 pb-16 lg:py-20 bg-gradient-to-b from-[#fbf9f5] via-[#f7f5f0] to-[#fbf9f5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- شريط الحالة الحرفي -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+        <div class="inline-flex items-center gap-2 bg-[#efeeea] px-3 py-1 rounded-full text-xs font-semibold text-[#55433a] shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-[#98440b] animate-pulse"></span>
+          <span>دُفعة هذا الأسبوع: قطع حرفية نادرة تصنع بحب وصبر</span>
+        </div>
+        <div class="hidden md:flex items-center gap-4 text-xs font-medium text-gray-500">
+          <span>🧵 خيوط وأقمشة قطن مصري</span>
+          <span>•</span>
+          <span>🧶 صوف ناعم مضاد للحساسية</span>
+          <span>•</span>
+          <span>💎 ريزن كريستالي نقي</span>
+          <span>•</span>
+          <span>القاهرة، مصر</span>
+        </div>
+      </div>
+
+      <!-- التصميم التحريري المنقسم (Editorial Grid) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center reveal-on-scroll">
+        
+        <!-- العمود النصي -->
+        <div class="lg:col-span-7 flex flex-col items-start text-right">
+          <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#98440b] bg-[#ffdbca]/60 px-3 py-1 rounded-lg mb-4">
+            <span class="material-symbols-outlined text-[16px]">verified</span>
+            <span>مشغولات يدوية 100% بأيدي حرفيات وحرفيين مصريين</span>
+          </div>
+
+          <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#1b1c1a] leading-tight mb-5">
+            كل غرزة، كل لمسة،<br />
+            <span class="text-[#98440b] relative inline-block">
+              حكاية فن وصبر
+              <span class="absolute -bottom-1 inset-x-0 h-1.5 bg-[#98440b]/20 rounded-full"></span>
+            </span> تُصنع لتدوم وتُورّث
+          </h1>
+
+          <p class="text-base sm:text-lg text-[#55433a] leading-relaxed mb-8 max-w-2xl">
+            نجمع لك أرقى الأعمال اليدوية المصرية: من طارات التطريز ثلاثية الأبعاد ودفء الكروشيه المبهج، إلى معلقات المكرمية وفخامة الريزن المذهب وسحر الخرز الصيفي. كل قطعة تخرج مدموغة بروح صانعها لتزين حياتك أو تسعد من تحب.
+          </p>
+
+          <!-- أزرار الإجراءات -->
+          <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-10">
+            <a href="products.html" class="btn-primary text-sm sm:text-base py-3 px-6 shadow-md hover:scale-105 transition-transform">
+              <span>تصفح كل المجموعات</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_left_alt</span>
+            </a>
+            <a href="craft-story.html" class="btn-outline text-sm sm:text-base py-3 px-6 hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-[18px] text-[#98440b]">play_circle</span>
+              <span>شاهد كواليس الورشة</span>
+            </a>
+          </div>
+
+          <!-- شارات الثقة والميزات -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+            <div class="p-3 bg-white rounded-xl border border-[#e8e4dc] flex items-center gap-3 hover:shadow-md transition-shadow">
+              <span class="w-9 h-9 rounded-lg bg-[#f5f3ef] text-[#98440b] flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[20px]">brush</span>
+              </span>
+              <div>
+                <strong class="text-xs font-bold text-[#1b1c1a] block">صنع يدوي 100%</strong>
+                <span class="text-[11px] text-gray-500">خامات طبيعية مختارة</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-white rounded-xl border border-[#e8e4dc] flex items-center gap-3 hover:shadow-md transition-shadow">
+              <span class="w-9 h-9 rounded-lg bg-[#f5f3ef] text-[#98440b] flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[20px]">edit_note</span>
+              </span>
+              <div>
+                <strong class="text-xs font-bold text-[#1b1c1a] block">تطريز ونقش مجاني</strong>
+                <span class="text-[11px] text-gray-500">إضافة الأسماء والتواريخ</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-white rounded-xl border border-[#e8e4dc] flex items-center gap-3 hover:shadow-md transition-shadow">
+              <span class="w-9 h-9 rounded-lg bg-[#f5f3ef] text-[#98440b] flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+              </span>
+              <div>
+                <strong class="text-xs font-bold text-[#1b1c1a] block">شحن لكل مصر</strong>
+                <span class="text-[11px] text-gray-500">معاينة قبل الدفع</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- عمود العرض البصري (Layered Craft Frame) -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative bg-white p-3 rounded-2xl shadow-xl border border-[#e8e4dc] overflow-hidden group">
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-[#f5f3ef] relative">
+              <img src="assets/embroidery/embroidery-2.jpg" alt="طارة تطريز يدوية راقية" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              
+              <!-- بطاقة القطعة العائمة -->
+              <div class="absolute bottom-4 inset-x-4 p-4 bg-white/95 backdrop-blur-md rounded-xl shadow-lg text-right flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-[#98440b] font-bold uppercase tracking-wider block">قطعة الأسبوع المميزة</span>
+                  <h3 class="font-bold text-sm text-[#1b1c1a]">طارة ماكينة الخياطة التراثية والزهور</h3>
+                  <span class="text-xs text-gray-500">تطريز يدوي بخيوط القطن المصري</span>
+                </div>
+                <div class="text-left shrink-0">
+                  <span class="font-bold text-lg text-[#98440b] font-display">650</span>
+                  <span class="text-xs text-gray-500 block">ج.م</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة جانبية طافية مع حركة سلسة: كروشيه الكرز -->
+          <div class="absolute -bottom-6 -right-6 hidden sm:flex items-center gap-3 bg-white p-2.5 rounded-xl shadow-xl border border-[#e8e4dc] max-w-xs animate-float">
+            <img src="assets/crochet/crochet-8.jpg" alt="كارديجان كروشيه الكرز" class="w-12 h-12 rounded-lg object-cover shrink-0" />
+            <div class="text-right">
+              <span class="text-xs font-bold text-[#1b1c1a] block">كارديجان الكرز الكروشيه</span>
+              <span class="text-[11px] text-[#98440b] font-medium block">الأكثر طلباً هذا الموسم 🔥</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 2. مبدل أنواع الهاند ميد (CRAFT TYPE SELECTOR) ==================== -->
+  <section class="py-10 bg-[#efeeea]/60 border-y border-[#e8e4dc] reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 text-right">
+        <div>
+          <span class="text-xs font-bold text-[#98440b] tracking-wider uppercase block mb-1">اختر نوع الحرفة</span>
+          <h2 class="font-display font-bold text-2xl text-[#1b1c1a]">تصفح حسب نوع الهاند ميد المفضل لديك</h2>
+        </div>
+        <p class="text-xs text-gray-500 max-w-md">
+          تضم «غُـرْزَة» أقساماً متنوعة من الحرف اليدوية؛ اختر القسم الذي تبحث عنه لعرض منتجاته المخصصة:
+        </p>
+      </div>
+
+      <!-- شريط أزرار أنواع الحرف -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-3 scrollbar-none" id="craft-tabs-bar">
+        <button data-craft-filter="all" class="badge-craft active px-4 py-2.5 text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all">
+          <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+          <span>جميع الحرف (24)</span>
+        </button>
+        <button data-craft-filter="embroidery" class="badge-craft px-4 py-2.5 text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all">
+          <span class="material-symbols-outlined text-[18px]">filter_vintage</span>
+          <span>تطريز يدوي وطارات</span>
+        </button>
+        <button data-craft-filter="crochet" class="badge-craft px-4 py-2.5 text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all">
+          <span class="material-symbols-outlined text-[18px]">styler</span>
+          <span>كروشيه وتريكو</span>
+        </button>
+        <button data-craft-filter="gift_hoops" class="badge-craft px-4 py-2.5 text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all">
+          <span class="material-symbols-outlined text-[18px]">card_giftcard</span>
+          <span>طارات هدايا ومكرميات</span>
+        </button>
+        <button data-craft-filter="beaded" class="badge-craft px-4 py-2.5 text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all">
+          <span class="material-symbols-outlined text-[18px]">diamond</span>
+          <span>إكسسوارات خرز</span>
+        </button>
+        <button data-craft-filter="resin" class="badge-craft px-4 py-2.5 text-xs font-bold flex items-center gap-1.5 shrink-0 transition-all">
+          <span class="material-symbols-outlined text-[18px]">palette</span>
+          <span>فن الريزن والديكور</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 3. استعراض المنتجات وفلتر الفئات العمرية ==================== -->
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
+    
+    <!-- الفلاتر المزدوجة ومحدد الفئة العمرية -->
+    <div class="bg-white p-4 sm:p-6 rounded-2xl border border-[#e8e4dc] shadow-sm mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <!-- اختيار الفئة العمرية -->
+      <div class="flex items-center gap-2 flex-wrap text-right">
+        <span class="text-xs font-bold text-gray-500 pl-2">الفئة العمرية:</span>
+        <button data-age-filter="all" class="badge-craft active px-3 py-1.5 text-xs font-semibold">
+          جميع الأعمار
+        </button>
+        <button data-age-filter="kids" class="badge-craft px-3 py-1.5 text-xs font-semibold flex items-center gap-1">
+          <span>👶</span>
+          <span>أطفال ومواليد</span>
+        </button>
+        <button data-age-filter="teens" class="badge-craft px-3 py-1.5 text-xs font-semibold flex items-center gap-1">
+          <span>👧</span>
+          <span>صبايا وشباب</span>
+        </button>
+        <button data-age-filter="adults" class="badge-craft px-3 py-1.5 text-xs font-semibold flex items-center gap-1">
+          <span>👩‍💼</span>
+          <span>كبار والجميع</span>
+        </button>
+      </div>
+
+      <!-- الترتيب والبحث وعدد المعروض -->
+      <div class="flex items-center gap-3 justify-between md:justify-end">
+        <div class="relative w-44 sm:w-56">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="ابحث بالاسم أو الخامة..." 
+            class="w-full bg-[#f5f3ef] text-xs px-3 py-2 rounded-lg text-right focus:outline-none focus:ring-1 focus:ring-[#98440b] border border-transparent focus:border-[#98440b]"
+          />
+          <span class="material-symbols-outlined absolute left-2.5 top-2 text-gray-400 text-[18px]">search</span>
+        </div>
+
+        <select id="sort-select" class="bg-[#f5f3ef] text-xs font-bold px-3 py-2 rounded-lg text-[#1b1c1a] border border-transparent focus:outline-none cursor-pointer">
+          <option value="popular">الأكثر طلباً</option>
+          <option value="newest">الأحدث بالورشة</option>
+          <option value="price-asc">السعر: من الأقل</option>
+          <option value="price-desc">السعر: من الأعلى</option>
+        </select>
+
+        <span id="products-count" class="text-xs font-bold text-[#98440b] whitespace-nowrap">-- قطعة</span>
+      </div>
+
+    </div>
+
+    <!-- شبكة المنتجات التفاعلية -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- يتم تعبئة البطاقات برمجياً عبر app.js -->
+    </div>
+
+    <!-- زر استعراض المزيد -->
+    <div class="mt-12 text-center">
+      <a href="products.html" class="btn-primary py-3 px-8 text-sm hover:scale-105 transition-transform">
+        <span>عرض كامل الكتالوج في صفحة المعرض</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ==================== 5. آراء العملاء الموثقة ==================== -->
+  <section class="py-16 bg-[#fbf9f5] reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 text-right">
+        <div>
+          <span class="text-xs font-bold text-[#98440b] uppercase block mb-1">شهادات حقيقية</span>
+          <h2 class="font-display font-bold text-3xl text-[#1b1c1a]">انطباعات من اقتنوا قطعنا اليدوية</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex text-amber-500">
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+          </div>
+          <span class="font-bold text-sm text-[#1b1c1a]">4.9 / 5</span>
+          <span class="text-xs text-gray-500">(أكثر من 420 تقييم موثق)</span>
+        </div>
+      </div>
+
+      <!-- شبكة الآراء -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm flex flex-col justify-between text-right hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex text-amber-500 mb-3">
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed mb-4">
+              “الكرز البارز في كارديجان الكروشيه تحفة فنية والصوف ناعم جداً ومبيشوكش نهائي! التغليف كان لطيف أوي وريحته عطرية ووصل في يومين بس.”
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#f0ede6] flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#ffdbca] text-[#98440b] font-bold text-xs flex items-center justify-center shrink-0">
+              م.ش
+            </div>
+            <div>
+              <strong class="text-xs font-bold text-[#1b1c1a] block">مريم الشريف</strong>
+              <span class="text-[11px] text-gray-500">المعادي، القاهرة • كارديجان الكرز</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm flex flex-col justify-between text-right hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex text-amber-500 mb-3">
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed mb-4">
+              “أهديت طارة مباركة المنزل لأختي في بيتها الجديد وكان الكل منبهر بدقة الخط العربي والورد المجسم. فخر حقيقي للصناعة اليدوية المصرية!”
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#f0ede6] flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#ffdbca] text-[#98440b] font-bold text-xs flex items-center justify-center shrink-0">
+              ن.ح
+            </div>
+            <div>
+              <strong class="text-xs font-bold text-[#1b1c1a] block">نورهان حسام الدين</strong>
+              <span class="text-[11px] text-gray-500">الزمالك، القاهرة • طارة مباركة المنزل</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm flex flex-col justify-between text-right hover:shadow-md transition-shadow">
+          <div>
+            <div class="flex text-amber-500 mb-3">
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed mb-4">
+              “الكوسترات مع حواف الذهب بتنور الصالون! اللمعان عالي والريزن تقيل ومقاوم للحرارة. بالإضافة لخدمة عملاء ممتازة وسريعة جداً.”
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#f0ede6] flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#ffdbca] text-[#98440b] font-bold text-xs flex items-center justify-center shrink-0">
+              ي.ع
+            </div>
+            <div>
+              <strong class="text-xs font-bold text-[#1b1c1a] block">د. ياسمين عادل</strong>
+              <span class="text-[11px] text-gray-500">الإسكندرية • طقم كوسترات الريزن</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 6. النشرة البريدية ==================== -->
+  <section class="py-16 bg-[#efeeea] reveal-on-scroll">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <span class="w-12 h-12 rounded-full bg-[#ffdbca] text-[#98440b] mx-auto flex items-center justify-center mb-4">
+        <span class="material-symbols-outlined text-[24px]">mark_email_read</span>
+      </span>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl text-[#1b1c1a] mb-2">انضم لمجتمع أصدقاء «غُـرْزَة»</h2>
+      <p class="text-sm text-[#55433a] mb-6 leading-relaxed">
+        سجل بريدك الإلكتروني ليصلك كواليس قطعنا الجديدة والدفعات المحدودة، واحصل على <strong class="text-[#98440b]">خصم 10%</strong> على أول طلب بكود: <code class="bg-white px-2 py-0.5 rounded text-[#98440b] font-bold">GHORZA10</code>
+      </p>
+
+      <form onsubmit="event.preventDefault(); GhorzaApp.showToast('شكراً لانضمامك! كود الخصم هو GHORZA10', 'success');" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+        <input type="email" required placeholder="اكتب بريدك الإلكتروني..." class="flex-1 px-4 py-3 rounded-xl bg-white border border-[#e8e4dc] text-xs focus:outline-none focus:border-[#98440b] text-right" />
+        <button type="submit" class="btn-primary py-3 px-6 text-xs whitespace-nowrap">اشترك الآن</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==================== الفوتر ==================== -->
+  <footer class="bg-[#f5f3ef] border-t border-[#e8e4dc] pt-12 pb-8 text-right">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-[#e8e4dc]">
+        
+        <div class="lg:col-span-5 flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <span class="font-display font-extrabold text-2xl text-[#98440b]">غُـرْزَة</span>
+            <span class="text-xs bg-[#e4e2de] text-gray-600 px-2.5 py-0.5 rounded-full font-bold">استوديو الحرف المصرية</span>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed max-w-sm">
+            نجمع رواد الصنعة المصرية في التطريز، الكروشيه، الريزن، والخرز لنقدم قطعاً فنية أصيلة تخاطب الوجدان وتعيش طويلاً.
+          </p>
+          <div class="flex items-center gap-2 text-xs text-gray-500 pt-2">
+            <span class="material-symbols-outlined text-[18px] text-[#98440b]">location_on</span>
+            <span>المعادي، القاهرة، جمهورية مصر العربية</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3 flex flex-col gap-2">
+          <h4 class="font-bold text-sm text-[#1b1c1a] mb-2">أقسام الحرف</h4>
+          <a href="products.html?craft=embroidery" class="text-xs text-gray-600 hover:text-[#98440b]">تطريز يدوي وطارات فنية</a>
+          <a href="products.html?craft=crochet" class="text-xs text-gray-600 hover:text-[#98440b]">كروشيه ومحبوكات شتوية</a>
+          <a href="products.html?craft=gift_hoops" class="text-xs text-gray-600 hover:text-[#98440b]">طارات مباركة وهدايا صداقة</a>
+          <a href="products.html?craft=beaded" class="text-xs text-gray-600 hover:text-[#98440b]">إكسسوارات خرز عصرية</a>
+          <a href="products.html?craft=resin" class="text-xs text-gray-600 hover:text-[#98440b]">ريزن وديكور منزلي</a>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col gap-3">
+          <h4 class="font-bold text-sm text-[#1b1c1a] mb-1">تواصل وطلبات خاصة</h4>
+          <p class="text-xs text-gray-600">هل ترغب في تفصيل هدية خاصة أو تطريز اسم محدد؟ تواصل مباشرة مع فريق الورشة:</p>
+          <div class="flex flex-col gap-2 text-xs">
+            <a href="https://wa.me/201098765432" target="_blank" class="flex items-center gap-2 text-[#98440b] font-bold">
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+              <span>محادثة واتساب سريعة (01098765432)</span>
+            </a>
+            <span class="text-gray-500">ساعات العمل: السبت إلى الخميس 10 ص - 8 م</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <p>© 2026 غُـرْزَة | Ghorza Craft Studio. جميع الحقوق محفوظة للمشروع.</p>
+        <div class="flex items-center gap-4">
+          <span>صُنع بحب في مصر 🇪🇬</span>
+          <span>•</span>
+          <a href="loading.html" class="hover:text-[#98440b] font-medium">🪡 شاشة التحميل الحرفية</a>
+          <span>•</span>
+          <a href="checkout.html" class="hover:text-[#98440b]">صفحة الدفع</a>
+          <span>•</span>
+          <a href="dashboard.html" class="hover:text-[#98440b] font-bold text-[#98440b]">لوحة الإدارة (Dashboard)</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== زر الواتساب العائم للتواصل الفوري ==================== -->
+  <a href="https://wa.me/201098765432?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%82%D8%B7%D8%B9%D8%A9%20%D9%8A%D8%AF%D9%88%D9%8A%D8%A9%20%D9%85%D9%86%20%D8%BA%D9%8F%D9%80%D8%B1%D9%92%D8%B2%D9%8E%D8%A9" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="fixed bottom-6 left-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:bg-[#20ba59] transition-all transform hover:scale-105 animate-radar" 
+     title="تواصل معنا عبر واتساب">
+    <span class="material-symbols-outlined text-2xl">chat</span>
+    <span class="text-xs font-bold hidden sm:inline">محادثة الأتيليه</span>
+  </a>
+
+  <!-- ==================== سلة التسوق المنبثقة (CART DRAWER) ==================== -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="GhorzaApp.closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    
+    <!-- رأس السلة -->
+    <div class="p-4 bg-white border-b border-[#e8e4dc] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#98440b]">shopping_bag</span>
+        <h3 class="font-bold text-base text-[#1b1c1a]">سلة المقتنيات</h3>
+      </div>
+      <button onclick="GhorzaApp.closeCartDrawer()" class="w-8 h-8 rounded-full bg-[#f5f3ef] hover:bg-[#eae8e4] flex items-center justify-center text-gray-600">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+
+    <!-- شريط مؤشر الشحن المجاني -->
+    <div class="free-shipping-bar">
+      <div id="shipping-progress-text" class="text-xs text-gray-700"></div>
+      <div class="progress-track">
+        <div id="shipping-progress-bar" class="progress-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- حاوي عناصر السلة -->
+    <div id="cart-drawer-items" class="flex-1 overflow-y-auto p-4"></div>
+
+    <!-- حالة السلة الفارغة -->
+    <div id="cart-drawer-empty" class="flex-1 flex flex-col items-center justify-center p-6 text-center text-gray-500" style="display: none;">
+      <span class="material-symbols-outlined text-5xl text-gray-300 mb-2">shopping_bag</span>
+      <h4 class="font-bold text-sm text-gray-700">سلتك فارغة حتى الآن</h4>
+      <p class="text-xs text-gray-500 mt-1">تصفح منتجاتنا اليدوية وأضف ما يعجبك</p>
+      <button onclick="GhorzaApp.closeCartDrawer()" class="btn-primary mt-4 text-xs py-2 px-4">ابدأ التسوق</button>
+    </div>
+
+    <!-- أسفل السلة وزر الدفع -->
+    <div id="cart-drawer-footer" class="p-4 bg-white border-t border-[#e8e4dc]">
+      <div class="flex justify-between items-baseline mb-4">
+        <span class="text-xs font-bold text-gray-500">المجموع الفرعي</span>
+        <span id="cart-drawer-subtotal" class="font-bold text-lg text-[#98440b] font-display">0 ج.م</span>
+      </div>
+      <a href="checkout.html" class="w-full btn-primary py-3 text-sm flex items-center justify-center gap-2">
+        <span>متابعة إتمام الطلب</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_left_alt</span>
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- ==================== نافذة المعاينة السريعة (QUICK VIEW MODAL) ==================== -->
+  <div id="quickview-modal" class="modal-overlay" onclick="if(event.target === this) GhorzaApp.closeQuickView()">
+    <div id="quickview-modal-content" class="modal-content"></div>
+  </div>
+
+  <!-- سكربتات التطبيق -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>

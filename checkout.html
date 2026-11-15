@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إتمام الطلب والدفع | غُـرْزَة — Ghorza Craft Studio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-[#fbf9f5] text-[#1b1c1a] antialiased">
+
+  <!-- هيدر صفحة الدفع المينيماليزم مع مسار المراحل من Stitch _5 -->
+  <header class="bg-white border-b border-[#e8e4dc] sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- اللوجو -->
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-base font-display">غ</div>
+        <div class="flex flex-col text-right">
+          <span class="font-display font-extrabold text-xl text-[#98440b] leading-none">غُـرْزَة</span>
+          <span class="text-[10px] text-gray-500 font-semibold tracking-wider uppercase">Egyptian Handmade Atelier</span>
+        </div>
+      </a>
+
+      <!-- مسار الخطوات التحريري -->
+      <nav aria-label="مراحل إتمام الشراء">
+        <ol class="flex items-center gap-2 sm:gap-3 bg-[#f5f3ef] px-4 py-1.5 rounded-full text-xs">
+          <li class="flex items-center gap-1.5 text-emerald-700 font-bold">
+            <span class="material-symbols-outlined text-[16px]">check_circle</span>
+            <span>السلة</span>
+          </li>
+          <span class="text-gray-300">/</span>
+          <li class="flex items-center gap-1.5 text-[#98440b] font-bold">
+            <span class="w-4 h-4 rounded-full bg-[#98440b] text-white flex items-center justify-center text-[10px]">2</span>
+            <span>بيانات الشحن والدفع</span>
+          </li>
+          <span class="text-gray-300">/</span>
+          <li class="flex items-center gap-1 text-gray-400">
+            <span class="w-4 h-4 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-[10px]">3</span>
+            <span>تأكيد الطلب</span>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- درع الأمان والخصوصية -->
+      <div class="flex items-center gap-1.5 bg-[#f5f3ef] px-3 py-1 rounded-full text-xs text-gray-600 font-medium">
+        <span class="material-symbols-outlined text-[#98440b] text-[16px]">verified_user</span>
+        <span>بياناتك مشفرة ومحمية 100%</span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- مساحة إتمام الطلب الرئيسية -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- شاشة تأكيد الطلب الناجحة (مخفية افتراضياً) -->
+    <div id="order-success-screen" class="bg-white p-8 sm:p-12 rounded-2xl border border-[#e8e4dc] shadow-lg max-w-2xl mx-auto text-center" style="display: none;">
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-4xl">check_circle</span>
+      </div>
+      <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-[#1b1c1a] mb-2">تم تأكيد طلبك بنجاح! 🎉</h2>
+      <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+        شكراً لاختيارك الصناعة اليدوية المصرية ودعمك للحرفيين. بدأ فريق ورشتنا الآن في تجهيز قطعك وتغليفها بعناية.
+      </p>
+
+      <div class="bg-[#f5f3ef] p-4 rounded-xl text-right text-xs space-y-2 mb-6 border border-[#e8e4dc]">
+        <div class="flex justify-between items-center pb-2 border-b border-[#e8e4dc]">
+          <span class="text-gray-500 font-bold">رقم الطلب:</span>
+          <strong id="success-order-num" class="text-sm text-[#98440b] font-display font-extrabold">ORD-00000</strong>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-gray-500">اسم المستلم:</span>
+          <span id="success-customer-name" class="font-bold text-gray-800">--</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-gray-500">طريقة الدفع:</span>
+          <span id="success-payment-method" class="font-bold text-gray-800">--</span>
+        </div>
+        <div class="flex justify-between items-center pt-2 border-t border-[#e8e4dc]">
+          <span class="text-gray-500 font-bold">المجموع الكلي:</span>
+          <strong id="success-total-price" class="text-base text-[#98440b] font-bold">-- ج.م</strong>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button onclick="window.print()" class="btn-outline text-xs py-2.5 px-4 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">print</span>
+          <span>طباعة إيصال الطلب</span>
+        </button>
+        <a href="index.html" class="btn-primary text-xs py-2.5 px-6">
+          <span>العودة للرئيسية والتسوق</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- شبكة نموذج الدفع وملخص الطلب -->
+    <div id="checkout-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- العمود الأيمن: نموذج بيانات العميل والشحن والدفع (7 cols) -->
+      <form id="checkout-form" class="lg:col-span-7 space-y-6 text-right" onsubmit="handleFormSubmit(event)">
+        
+        <!-- 1. بيانات الاتصال -->
+        <div class="bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm">
+          <div class="flex items-center justify-between mb-4 pb-2 border-b border-[#f0ede6]">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#98440b] text-white flex items-center justify-center text-xs font-bold">1</span>
+              <h2 class="font-bold text-base text-[#1b1c1a]">بيانات الاتصال والتواصل</h2>
+            </div>
+            <span class="text-[11px] text-gray-400">مطلوب للتوصيل</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1" for="phone">
+                <span>رقم الهاتف المحمول</span>
+                <span class="text-[#98440b] font-normal text-[11px] mr-1">(لتتبع شحن الواتساب)</span>
+              </label>
+              <input 
+                type="tel" 
+                id="phone" 
+                required 
+                dir="ltr" 
+                placeholder="010XXXXXXXX" 
+                class="w-full bg-[#f5f3ef] text-xs px-3 py-2.5 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b] text-left" 
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1" for="email">
+                <span>البريد الإلكتروني</span>
+                <span class="text-gray-400 font-normal text-[11px] mr-1">(اختياري للفاتورة)</span>
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                dir="ltr" 
+                placeholder="name@example.com" 
+                class="w-full bg-[#f5f3ef] text-xs px-3 py-2.5 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b] text-left" 
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. عنوان الشحن والتوصيل في مصر -->
+        <div class="bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm">
+          <div class="flex items-center justify-between mb-4 pb-2 border-b border-[#f0ede6]">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#98440b] text-white flex items-center justify-center text-xs font-bold">2</span>
+              <h2 class="font-bold text-base text-[#1b1c1a]">عنوان الشحن والتوصيل في مصر</h2>
+            </div>
+            <span class="text-xs text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">شحن سريع لكافة المحافظات</span>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1" for="full-name">الاسم بالكامل للمستلم</label>
+              <input 
+                type="text" 
+                id="full-name" 
+                required 
+                placeholder="مثال: أحمد عبد الرحمن" 
+                class="w-full bg-[#f5f3ef] text-xs px-3 py-2.5 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b]" 
+              />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1" for="governorate-select">المحافظة</label>
+                <select 
+                  id="governorate-select" 
+                  onchange="updateShippingGovernorate(this.value)" 
+                  class="w-full bg-[#f5f3ef] text-xs font-semibold px-3 py-2.5 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b] cursor-pointer"
+                >
+                  <option value="cairo_giza" selected>القاهرة والجيزة (شحن 50 ج.م - خلال 24-48 ساعة)</option>
+                  <option value="alexandria">الإسكندرية والبحيرة (شحن 60 ج.م)</option>
+                  <option value="delta_canal">محافظات الدلتا والقناة (شحن 65 ج.م)</option>
+                  <option value="upper_egypt">محافظات الصعيد والبحر الأحمر (شحن 80 ج.م)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1" for="district">المنطقة أو الحي</label>
+                <input 
+                  type="text" 
+                  id="district" 
+                  required 
+                  placeholder="مثال: المعادي دجلة، التجمع، سموحة..." 
+                  class="w-full bg-[#f5f3ef] text-xs px-3 py-2.5 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b]" 
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1" for="address">اسم الشارع، رقم العمارة، رقم الشقة والدور</label>
+              <input 
+                type="text" 
+                id="address" 
+                required 
+                placeholder="شارع النصر، عمارة 14 ب، الدور الرابع، شقة 8" 
+                class="w-full bg-[#f5f3ef] text-xs px-3 py-2.5 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b]" 
+              />
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1" for="delivery-notes">
+                <span>ملاحظات إضافية أو علامة مميزة</span>
+                <span class="text-gray-400 font-normal text-[11px] mr-1">(اختياري)</span>
+              </label>
+              <textarea 
+                id="delivery-notes" 
+                rows="2" 
+                placeholder="بجوار سوبرماركت كذا، يرجى الاتصال قبل الوصول..." 
+                class="w-full bg-[#f5f3ef] text-xs px-3 py-2 rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b] resize-none"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. طريقة الدفع بالسوق المصري -->
+        <div class="bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm">
+          <div class="flex items-center justify-between mb-4 pb-2 border-b border-[#f0ede6]">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[#98440b] text-white flex items-center justify-center text-xs font-bold">3</span>
+              <h2 class="font-bold text-base text-[#1b1c1a]">اختر وسيلة الدفع</h2>
+            </div>
+            <span class="text-xs text-gray-500 font-medium">طرق دفع آمنة 100%</span>
+          </div>
+
+          <div class="space-y-3">
+            <!-- خيار 1: الدفع نقداً عند الاستلام -->
+            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-[#98440b] bg-[#fbf9f5] cursor-pointer">
+              <input type="radio" name="payment_method" value="cod" checked onchange="togglePaymentTabs(this.value)" class="mt-1 accent-[#98440b]" />
+              <div class="flex-1">
+                <div class="flex justify-between items-center">
+                  <strong class="text-xs font-bold text-[#1b1c1a] flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px] text-[#98440b]">payments</span>
+                    <span>الدفع نقداً عند الاستلام (COD)</span>
+                  </strong>
+                  <span class="text-[10px] bg-[#ffdbca] text-[#98440b] font-bold px-2 py-0.5 rounded">الأكثر طلباً بمصر</span>
+                </div>
+                <p class="text-[11px] text-gray-600 mt-1">عاين منتجاتك وتأكد من جودة الغرز والتطريز قبل تسليم المبلغ للمندوب.</p>
+              </div>
+            </label>
+
+            <!-- خيار 2: إنستاباي InstaPay -->
+            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-[#e8e4dc] hover:bg-[#fbf9f5] cursor-pointer">
+              <input type="radio" name="payment_method" value="instapay" onchange="togglePaymentTabs(this.value)" class="mt-1 accent-[#98440b]" />
+              <div class="flex-1">
+                <div class="flex justify-between items-center">
+                  <strong class="text-xs font-bold text-[#1b1c1a] flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px] text-[#98440b]">account_balance</span>
+                    <span>تحويل عبر إنستاباي (InstaPay / IPN)</span>
+                  </strong>
+                  <span class="text-[10px] bg-gray-100 text-gray-700 font-semibold px-2 py-0.5 rounded">تأكيد لحظي</span>
+                </div>
+                <p class="text-[11px] text-gray-600 mt-1">تحويل لحظي مباشر لحساب الورشة بدون أي مصاريف إضافية.</p>
+                <div id="instapay-box" class="mt-2.5 p-2.5 bg-[#f5f3ef] rounded-lg text-xs" style="display: none;">
+                  <span class="text-gray-500 block mb-1">عنوان الدفع اللحظي (IPA):</span>
+                  <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded border border-[#e8e4dc]">
+                    <span class="font-mono font-bold text-[#98440b]" dir="ltr">ghorza.atelier@instapay</span>
+                    <button type="button" onclick="navigator.clipboard.writeText('ghorza.atelier@instapay'); GhorzaApp.showToast('تم نسخ معرف إنستاباي!', 'success');" class="text-xs text-gray-600 hover:text-[#98440b] flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px]">content_copy</span> نسخ
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <!-- خيار 3: محافظ الهاتف كاش -->
+            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-[#e8e4dc] hover:bg-[#fbf9f5] cursor-pointer">
+              <input type="radio" name="payment_method" value="wallets" onchange="togglePaymentTabs(this.value)" class="mt-1 accent-[#98440b]" />
+              <div class="flex-1">
+                <div class="flex justify-between items-center">
+                  <strong class="text-xs font-bold text-[#1b1c1a] flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-[18px] text-[#98440b]">phone_iphone</span>
+                    <span>المحافظ الإلكترونية (فودافون كاش، أورنج، اتصالات، وي)</span>
+                  </strong>
+                </div>
+                <p class="text-[11px] text-gray-600 mt-1">تحويل عبر كاش إلى رقم الورشة المعتمد مع إرسال رسالة التأكيد.</p>
+                <div id="wallets-box" class="mt-2.5 p-2.5 bg-[#f5f3ef] rounded-lg text-xs" style="display: none;">
+                  <span class="text-gray-500 block mb-1">رقم محفظة الورشة للتحويل:</span>
+                  <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded border border-[#e8e4dc]">
+                    <span class="font-mono font-bold text-[#98440b]" dir="ltr">01098765432</span>
+                    <button type="button" onclick="navigator.clipboard.writeText('01098765432'); GhorzaApp.showToast('تم نسخ رقم المحفظة!', 'success');" class="text-xs text-gray-600 hover:text-[#98440b] flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px]">content_copy</span> نسخ
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- زر تأكيد الطلب النهائي -->
+        <button type="submit" class="w-full btn-primary py-4 text-base shadow-md">
+          <span class="material-symbols-outlined text-[20px]">check_circle</span>
+          <span>تأكيد الطلب الآن</span>
+        </button>
+      </form>
+
+      <!-- العمود الأيسر: ملخص الطلب وسلة الشراء (5 cols) -->
+      <aside class="lg:col-span-5 bg-white p-6 rounded-2xl border border-[#e8e4dc] shadow-sm text-right sticky top-28">
+        <h3 class="font-bold text-base text-[#1b1c1a] pb-3 border-b border-[#f0ede6] flex items-center justify-between">
+          <span>ملخص الطلب</span>
+          <span id="summary-items-count" class="text-xs text-[#98440b] font-bold">-- قطع</span>
+        </h3>
+
+        <!-- قائمة عناصر السلة -->
+        <div id="summary-items-list" class="divide-y divide-[#f0ede6] max-h-60 overflow-y-auto my-3"></div>
+
+        <!-- إدخال كود الخصم -->
+        <div class="py-3 border-t border-[#f0ede6]">
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              id="coupon-input" 
+              placeholder="كود الخصم (مثال: GHORZA10)" 
+              class="flex-1 bg-[#f5f3ef] text-xs px-3 py-2 rounded-lg border border-[#e8e4dc] text-right focus:outline-none uppercase" 
+            />
+            <button type="button" onclick="applyCoupon()" class="px-4 py-2 bg-[#1b1c1a] hover:bg-[#98440b] text-white text-xs font-bold rounded-lg transition-colors">
+              تطبيق
+            </button>
+          </div>
+          <span id="coupon-feedback" class="text-[11px] block mt-1" style="display: none;"></span>
+        </div>
+
+        <!-- الحسابات المالية والنهائية -->
+        <div class="pt-3 border-t border-[#f0ede6] space-y-2 text-xs">
+          <div class="flex justify-between items-center text-gray-600">
+            <span>المجموع الفرعي:</span>
+            <span id="summary-subtotal" class="font-bold text-gray-800">-- ج.م</span>
+          </div>
+
+          <div id="summary-discount-row" class="flex justify-between items-center text-emerald-700" style="display: none;">
+            <span>الخصم المطبق (10%):</span>
+            <span id="summary-discount" class="font-bold">-0 ج.م</span>
+          </div>
+
+          <div class="flex justify-between items-center text-gray-600">
+            <span>تكلفة الشحن:</span>
+            <span id="summary-shipping" class="font-bold text-gray-800">50 ج.م</span>
+          </div>
+
+          <div class="flex justify-between items-baseline pt-3 border-t border-[#e8e4dc]">
+            <strong class="text-sm text-[#1b1c1a]">المجموع النهائي:</strong>
+            <strong id="summary-total" class="font-display font-extrabold text-2xl text-[#98440b]">-- ج.م</strong>
+          </div>
+        </div>
+
+        <div class="mt-4 p-3 bg-[#f5f3ef] rounded-xl text-[11px] text-gray-500 space-y-1">
+          <p class="flex items-center gap-1 font-semibold text-gray-700">
+            <span class="material-symbols-outlined text-[15px] text-[#98440b]">shield</span>
+            <span>ضمان استرجاع أو استبدال فوري عند المعاينة</span>
+          </p>
+          <p>تصلك تفاصيل الطلب والتحديثات خطوة بخطوة عبر رقم الواتساب المسجل.</p>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    let currentShippingCost = 50;
+
+    function renderCheckoutSummary() {
+      const totals = GhorzaApp.getCartTotals(currentShippingCost);
+      const itemsList = document.getElementById('summary-items-list');
+      const countEl = document.getElementById('summary-items-count');
+
+      if (itemsList) {
+        if (GhorzaApp.state.cart.length === 0) {
+          itemsList.innerHTML = `<p class="py-6 text-center text-xs text-gray-500">لا توجد منتجات في السلة. <a href="products.html" class="text-[#98440b] font-bold underline">تسوق الآن</a></p>`;
+        } else {
+          itemsList.innerHTML = GhorzaApp.state.cart.map(item => `
+            <div class="flex items-center gap-3 py-2.5">
+              <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg object-cover bg-[#f5f3ef] shrink-0">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-bold text-xs text-[#1b1c1a] truncate">${item.name}</h4>
+                <span class="text-[11px] text-gray-500">الكمية: ${item.quantity}</span>
+                ${item.customNote ? `<span class="text-[10px] text-[#98440b] block truncate">${item.customNote}</span>` : ''}
+              </div>
+              <span class="font-bold text-xs text-[#1b1c1a] shrink-0">${(item.price * item.quantity).toLocaleString('ar-EG')} ج.م</span>
+            </div>
+          `).join('');
+        }
+      }
+
+      if (countEl) countEl.textContent = `${totals.itemCount} قطع`;
+      document.getElementById('summary-subtotal').textContent = `${totals.subtotal.toLocaleString('ar-EG')} ج.م`;
+      
+      const discRow = document.getElementById('summary-discount-row');
+      if (totals.discount > 0) {
+        discRow.style.display = 'flex';
+        document.getElementById('summary-discount').textContent = `-${totals.discount.toLocaleString('ar-EG')} ج.م`;
+      } else {
+        discRow.style.display = 'none';
+      }
+
+      const shipEl = document.getElementById('summary-shipping');
+      if (totals.isFreeShipping) {
+        shipEl.innerHTML = `<span class="text-emerald-700 font-bold">شحن مجاني 🎉</span>`;
+      } else {
+        shipEl.textContent = `${totals.shipping.toLocaleString('ar-EG')} ج.م`;
+      }
+
+      document.getElementById('summary-total').textContent = `${totals.total.toLocaleString('ar-EG')} ج.م`;
+    }
+
+    function updateShippingGovernorate(govKey) {
+      if (govKey === 'cairo_giza') currentShippingCost = 50;
+      else if (govKey === 'alexandria') currentShippingCost = 60;
+      else if (govKey === 'delta_canal') currentShippingCost = 65;
+      else if (govKey === 'upper_egypt') currentShippingCost = 80;
+      renderCheckoutSummary();
+    }
+
+    function togglePaymentTabs(method) {
+      document.getElementById('instapay-box').style.display = method === 'instapay' ? 'block' : 'none';
+      document.getElementById('wallets-box').style.display = method === 'wallets' ? 'block' : 'none';
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      const feedback = document.getElementById('coupon-feedback');
+      if (code === 'GHORZA10') {
+        GhorzaApp.state.coupon = { code: 'GHORZA10', discountPercent: 10 };
+        feedback.textContent = 'تم تطبيق خصم 10% بنجاح!';
+        feedback.className = 'text-[11px] block mt-1 text-emerald-700 font-bold';
+        feedback.style.display = 'block';
+        renderCheckoutSummary();
+      } else {
+        feedback.textContent = 'كود الخصم غير صحيح أو منتهي الصلاحية.';
+        feedback.className = 'text-[11px] block mt-1 text-red-600 font-bold';
+        feedback.style.display = 'block';
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      if (GhorzaApp.state.cart.length === 0) {
+        GhorzaApp.showToast('سلة المشتريات فارغة!', 'error');
+        return;
+      }
+
+      const paymentMethodRadio = document.querySelector('input[name="payment_method"]:checked');
+      const formData = {
+        name: document.getElementById('full-name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        governorate: document.getElementById('governorate-select').value,
+        district: document.getElementById('district').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        notes: document.getElementById('delivery-notes').value.trim(),
+        paymentMethod: paymentMethodRadio ? paymentMethodRadio.value : 'cod',
+        shippingCost: currentShippingCost
+      };
+
+      const order = GhorzaApp.placeOrder(formData);
+      if (order) {
+        // إخفاء شبكة الدفع وإظهار شاشة النجاح
+        document.getElementById('checkout-grid').style.display = 'none';
+        const success = document.getElementById('order-success-screen');
+        success.style.display = 'block';
+
+        document.getElementById('success-order-num').textContent = order.orderNumber;
+        document.getElementById('success-customer-name').textContent = order.customer.name;
+        document.getElementById('success-payment-method').textContent = 
+          order.payment.method === 'cod' ? 'الدفع نقداً عند الاستلام' : 
+          order.payment.method === 'instapay' ? 'إنستاباي (InstaPay)' : 'محفظة هاتف كاش';
+        document.getElementById('success-total-price').textContent = `${order.totals.total.toLocaleString('ar-EG')} ج.م`;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCheckoutSummary();
+    });
+  </script>
+</body>
+</html>

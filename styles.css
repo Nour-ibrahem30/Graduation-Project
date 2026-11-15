@@ -1,0 +1,578 @@
+/* ==========================================================================
+   غُـرْزَة | Ghorza Craft Studio
+   ملف الأنماط والتنسيقات المتكامل (Design System & Custom Styles)
+   مستوحى من DESIGN.md و Stitch Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;600;700;800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+  /* ألوان الهوية الحرفية - غرزة */
+  --primary: #98440b;
+  --primary-hover: #7b3507;
+  --primary-container: #b85c24;
+  --on-primary: #ffffff;
+  --primary-fixed: #ffdbca;
+  --on-primary-fixed: #341100;
+
+  --secondary: #5f5e5e;
+  --on-secondary: #ffffff;
+  --secondary-container: #e2dfde;
+
+  --surface: #fbf9f5;
+  --surface-low: #f5f3ef;
+  --surface-container: #efeeea;
+  --surface-high: #eae8e4;
+  --surface-highest: #e4e2de;
+  --surface-lowest: #ffffff;
+
+  --on-surface: #1b1c1a;
+  --on-surface-variant: #55433a;
+  --inverse-surface: #30312e;
+  --inverse-on-surface: #f2f0ed;
+
+  --outline: #897268;
+  --outline-variant: #dcc1b5;
+  --tertiary: #625c57;
+  --error: #ba1a1a;
+  --success: #15803d;
+
+  /* الحدود ونصف القطر */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* الظلال التكتيلية */
+  --shadow-subtle: 0 1px 3px rgba(30, 20, 10, 0.05);
+  --shadow-tactile: 0 4px 16px -2px rgba(30, 30, 30, 0.06), 0 1px 3px 0 rgba(184, 92, 36, 0.04);
+  --shadow-elevated: 0 12px 28px -4px rgba(30, 20, 10, 0.12), 0 4px 8px -2px rgba(184, 92, 36, 0.06);
+
+  /* الخطوط */
+  --font-display: 'Bricolage Grotesque', 'Noto Kufi Arabic', sans-serif;
+  --font-arabic: 'Noto Kufi Arabic', 'Hanken Grotesk', sans-serif;
+  --font-latin: 'Hanken Grotesk', sans-serif;
+}
+
+/* إعادة الضبط والقواعد الأساسية */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  scroll-behavior: smooth;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  background-color: var(--surface);
+  overflow-x: hidden;
+}
+
+/* عناوين الموقع */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--on-surface);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* فئات مساعدة للمظهر الحرفي */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-primary-craft {
+  color: var(--primary);
+}
+
+.bg-primary-craft {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+/* فواصل الخياطة المخرمة (Seam Divider) من Stitch DESIGN.md */
+.seam-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  opacity: 0.7;
+}
+
+.seam-divider::before,
+.seam-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px dashed var(--outline-variant);
+}
+
+.seam-divider-badge {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--primary);
+  letter-spacing: 0.2em;
+}
+
+/* شارات المنتجات والحرف */
+.badge-craft {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background-color: var(--surface-low);
+  color: var(--on-surface-variant);
+  border: 1px solid var(--outline-variant);
+}
+
+.badge-craft.active,
+.badge-craft-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.badge-age {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-container);
+  color: var(--tertiary);
+}
+
+/* بطاقة المنتج الحرفي */
+.product-card {
+  background-color: var(--surface-lowest);
+  border: 1px solid #e8e4dc;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-container);
+  box-shadow: var(--shadow-elevated);
+}
+
+.product-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.8;
+  overflow: hidden;
+  background-color: var(--surface-low);
+}
+
+.product-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-image-wrap img {
+  transform: scale(1.06);
+}
+
+/* أزرار المتجر */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--on-surface);
+  color: var(--surface-lowest);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-subtle);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(152, 68, 11, 0.25);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--on-surface);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  border: 1.5px solid var(--outline);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--surface-low);
+}
+
+/* سلة التسوق المنبثقة (Cart Drawer) */
+.cart-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(27, 28, 26, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.cart-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--surface);
+  box-shadow: -4px 0 25px rgba(0, 0, 0, 0.15);
+  z-index: 101;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+/* شريط تقدم الشحن المجاني في السلة */
+.free-shipping-bar {
+  background-color: var(--surface-low);
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: #e4e2de;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-container));
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+/* إشعارات الـ Toast */
+#toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  background-color: var(--on-surface);
+  color: var(--surface);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: slideInToast 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-width: 380px;
+  border-right: 4px solid var(--primary);
+}
+
+@keyframes slideInToast {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* نافذة المعاينة السريعة (Modal) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(27, 28, 26, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background-color: var(--surface);
+  border-radius: var(--radius-xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid var(--outline-variant);
+  transform: scale(0.92) translateY(20px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1) translateY(0);
+}
+
+/* ==========================================================================
+   الحركات والانتقالات التفاعلية (Website-Wide Animations)
+   ========================================================================== */
+
+/* الحركات الأساسية Keyframes */
+@keyframes drawStitch {
+  0% { stroke-dashoffset: 600; }
+  45% { stroke-dashoffset: 0; }
+  70% { stroke-dashoffset: 0; opacity: 1; }
+  90% { opacity: 0; }
+  100% { stroke-dashoffset: 600; opacity: 0; }
+}
+
+@keyframes needleMove {
+  0% { transform: translate(70px, 120px) rotate(-35deg); opacity: 0; }
+  5% { opacity: 1; }
+  10% { transform: translate(110px, 150px) rotate(-20deg); }
+  18% { transform: translate(190px, 150px) rotate(15deg); }
+  26% { transform: translate(270px, 150px) rotate(-20deg); }
+  34% { transform: translate(350px, 150px) rotate(15deg); }
+  42% { transform: translate(430px, 150px) rotate(-20deg); }
+  50% { transform: translate(510px, 140px) rotate(10deg); opacity: 1; }
+  60% { transform: translate(530px, 110px) rotate(30deg); opacity: 0.8; }
+  85% { opacity: 0; transform: translate(530px, 90px) rotate(30deg); }
+  100% { opacity: 0; transform: translate(70px, 120px) rotate(-35deg); }
+}
+
+@keyframes holePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(8px) rotate(-1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.08); }
+}
+
+@keyframes cartBump {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.35) rotate(-6deg); }
+  50% { transform: scale(0.9) rotate(4deg); }
+  75% { transform: scale(1.15) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes rotateStamp {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* فئات الحركة القابلة لإعادة الاستخدام */
+.animate-float {
+  animation: floatSlow 4.5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 5.2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.animate-cart-bump {
+  animation: cartBump 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-radar {
+  animation: radarPulse 2.4s infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotateStamp 25s linear infinite;
+}
+
+/* ظهور العناصر مع التمرير (Scroll Reveal) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* تأخير متتابع (Stagger delays) */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* تأثيرات التمرير فوق البطاقات والأزرار */
+.product-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.product-card .product-image-container img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-image-container img {
+  transform: scale(1.06);
+}
+
+.craft-pill-tab {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.craft-pill-tab:hover {
+  transform: translateY(-2px);
+}
+
+.craft-pill-tab:active,
+button:active {
+  transform: scale(0.96);
+}
+
+/* شاشة التحميل الأولية المدمجة (Integrated Atelier Preloader) */
+#atelier-preloader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--surface);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease, transform 0.6s ease;
+}
+
+#atelier-preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+/* تخصيص مؤشر التمرير */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-low);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+

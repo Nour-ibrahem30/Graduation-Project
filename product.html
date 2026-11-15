@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تفاصيل القطعة الحرفية | غُـرْزَة — Ghorza Craft Studio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-[#fbf9f5] text-[#1b1c1a] antialiased">
+
+  <!-- الشريط العلوي -->
+  <aside class="bg-[#b85c24] text-white text-xs font-semibold py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2">
+    <span>✨ شحن مجاني لكافة محافظات مصر للطلبات فوق 1,500 ج.م</span>
+    <span class="opacity-60">•</span>
+    <span>تطريز وحفر الأسماء مجاناً</span>
+  </aside>
+
+  <!-- الهيدر -->
+  <header class="sticky top-0 z-40 bg-[#fbf9f5]/90 backdrop-blur-md border-b border-[#e8e4dc]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-xl shadow-sm font-display">غ</div>
+        <div class="flex flex-col text-right">
+          <span class="font-display font-extrabold text-2xl text-[#98440b] tracking-tight leading-none">غُـرْزَة</span>
+          <span class="text-[11px] text-[#55433a] font-medium mt-0.5">مشغولات يدوية مصرية أصيلة</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-[#55433a]">
+        <a href="index.html" class="hover:text-[#98440b]">الرئيسية</a>
+        <a href="products.html" class="hover:text-[#98440b]">المجموعة الكاملة</a>
+        <a href="craft-story.html" class="hover:text-[#98440b]">حكاية الصنعة</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="GhorzaApp.openCartDrawer()" class="flex items-center gap-2 bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#1b1c1a] px-3.5 py-2 rounded-xl border border-[#e8e4dc]">
+          <span class="material-symbols-outlined text-[20px] text-[#98440b]">shopping_bag</span>
+          <span class="text-xs font-bold hidden sm:inline">السلة</span>
+          <span class="cart-count-badge bg-[#98440b] text-white text-xs px-2 py-0.5 rounded-full font-bold" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- مسار التصفح -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-500 text-right flex items-center gap-2">
+    <a href="index.html" class="hover:text-[#98440b]">الرئيسية</a>
+    <span>/</span>
+    <a href="products.html" class="hover:text-[#98440b]">المجموعة</a>
+    <span>/</span>
+    <span id="breadcrumb-category" class="text-gray-500">--</span>
+    <span>/</span>
+    <span id="breadcrumb-title" class="font-bold text-[#1b1c1a]">--</span>
+  </div>
+
+  <!-- تفاصيل المنتج الرئيسية -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      
+      <!-- عمود الصور والمعرض (يمين بالـ RTL) -->
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <!-- الإطار الرئيسي للصورة -->
+        <div class="bg-white p-3 rounded-2xl border border-[#e8e4dc] shadow-sm overflow-hidden">
+          <div class="aspect-[4/3] rounded-xl overflow-hidden bg-[#f5f3ef] relative">
+            <img id="main-product-img" src="" alt="" class="w-full h-full object-cover transition-all duration-300" />
+            <div id="product-badge-overlay" class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded-full text-xs font-bold text-[#98440b] shadow-sm"></div>
+          </div>
+        </div>
+
+        <!-- شريط مصغرات الصور التفاعلية -->
+        <div id="thumbs-container" class="grid grid-cols-4 gap-3"></div>
+
+        <!-- ميزات الورشة المصاحبة للقطعة -->
+        <div class="bg-[#f5f3ef] p-4 rounded-xl border border-[#e8e4dc] flex items-center gap-4 text-right">
+          <span class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-[#98440b] shadow-sm shrink-0">
+            <span class="material-symbols-outlined text-[24px]">verified</span>
+          </span>
+          <div>
+            <h4 class="font-bold text-xs text-[#1b1c1a]">ضمان الجودة وصحة الخامة</h4>
+            <p class="text-[11px] text-gray-600">كل قطعة تمر باختبارات متانة وفحص دقيق قبل التغليف بعلبة كرتونية راقية معطرة بالزيوت الطبيعية.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- عمود البيانات والمواصفات وطلب الشراء (يسار بالـ RTL) -->
+      <div class="lg:col-span-5 flex flex-col gap-5 text-right">
+        
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span id="product-craft-badge" class="badge-craft badge-craft-primary">--</span>
+            <div class="flex items-center gap-1 text-xs font-bold text-gray-700">
+              <span class="material-symbols-outlined text-amber-500 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span id="product-rating">4.9</span>
+              <span id="product-reviews-count" class="text-gray-400 font-normal">(--)</span>
+            </div>
+          </div>
+
+          <h1 id="product-name" class="font-display font-extrabold text-2xl sm:text-3xl text-[#1b1c1a] leading-tight mb-3">--</h1>
+          <p id="product-desc" class="text-sm text-[#55433a] leading-relaxed mb-4">--</p>
+        </div>
+
+        <!-- السعر -->
+        <div class="p-4 bg-white rounded-xl border border-[#e8e4dc] flex items-baseline justify-between">
+          <div class="flex items-baseline gap-2">
+            <span id="product-price" class="font-display font-bold text-3xl text-[#98440b]">--</span>
+            <span class="text-sm text-gray-500 font-semibold">ج.م</span>
+            <span id="product-compare-price" class="text-sm text-gray-400 line-through mr-1" style="display: none;"></span>
+          </div>
+          <span class="text-xs text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-md">جاهز للشحن / يصنع بحب</span>
+        </div>
+
+        <!-- محاكي التخصيص بالاسم / العبارة (Bespoke Simulator) -->
+        <div id="custom-section" class="bg-[#f5f3ef] p-4 rounded-xl border border-[#e8e4dc] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-[#1b1c1a]" id="custom-field-title">تخصيص مجاني بالاسم أو العبارة</span>
+            <span class="text-[10px] bg-white text-[#98440b] font-bold px-2 py-0.5 rounded shadow-xs">خدمة مجانية</span>
+          </div>
+          <p class="text-[11px] text-gray-600">يمكننا تطريز أو حفر الاسم أو الحروف الأولى على القطعة لتقديمها كهدية فريدة.</p>
+          <input 
+            type="text" 
+            id="product-custom-input" 
+            placeholder="مثال: ياسمين، أو A.M، أو تاريخ زواج..." 
+            class="w-full bg-white px-3 py-2 text-xs rounded-lg border border-[#e8e4dc] focus:outline-none focus:border-[#98440b] text-right"
+          />
+        </div>
+
+        <!-- التحكم في الكمية وزر الإضافة -->
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center gap-3">
+            <!-- عداد الكمية -->
+            <div class="flex items-center bg-white border border-[#e8e4dc] rounded-xl px-2 py-1.5 shadow-sm">
+              <button onclick="decrementQty()" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center font-bold text-gray-700">-</button>
+              <span id="selected-qty" class="w-10 text-center font-bold text-sm">1</span>
+              <button onclick="incrementQty()" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center font-bold text-gray-700">+</button>
+            </div>
+
+            <!-- زر أضف للسلة -->
+            <button onclick="handleAddCurrentToCart()" class="flex-1 btn-primary py-3 text-sm">
+              <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+              <span>إضافة إلى سلة المشتريات</span>
+            </button>
+          </div>
+
+          <!-- زر الشراء الفوري -->
+          <button onclick="handleInstantBuy()" class="w-full bg-[#98440b] hover:bg-[#7b3507] text-white py-3 rounded-xl font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">flash_on</span>
+            <span>شراء فوري ومتابعة الدفع السريع</span>
+          </button>
+        </div>
+
+        <!-- التبويبات الفنية والتفاصيل -->
+        <div class="bg-white p-5 rounded-xl border border-[#e8e4dc] text-xs space-y-3 mt-2">
+          <h4 class="font-bold text-sm text-[#1b1c1a] border-b border-[#f0ede6] pb-2">المواصفات الفنية للقطعة</h4>
+          <p><strong class="text-gray-700">الخامات:</strong> <span id="spec-materials">--</span></p>
+          <p><strong class="text-gray-700">الأبعاد:</strong> <span id="spec-dimensions">--</span></p>
+          <p><strong class="text-gray-700">إرشادات العناية:</strong> <span id="spec-care">--</span></p>
+          <div class="pt-2 border-t border-[#f0ede6] text-gray-500">
+            <span>🚚 شحن سريع لكافة محافظات مصر • دفع نقداً عند الاستلام أو عبر إنستاباي والمحافظ الإلكترونية</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- قسم منتجات مقترحة مشابهة -->
+    <section class="mt-20 pt-10 border-t border-[#e8e4dc]">
+      <h2 class="font-display font-bold text-2xl text-[#1b1c1a] text-right mb-6">قطع يدوية أخرى قد تنال إعجابك</h2>
+      <div id="related-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="bg-[#f5f3ef] border-t border-[#e8e4dc] py-8 text-center text-xs text-gray-500 mt-20">
+    <p>© 2026 غُـرْزَة | Ghorza Craft Studio. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <!-- السلة المنبثقة -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="GhorzaApp.closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="p-4 bg-white border-b border-[#e8e4dc] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#98440b]">shopping_bag</span>
+        <h3 class="font-bold text-base text-[#1b1c1a]">سلة المقتنيات</h3>
+      </div>
+      <button onclick="GhorzaApp.closeCartDrawer()" class="w-8 h-8 rounded-full bg-[#f5f3ef] flex items-center justify-center text-gray-600">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+    <div class="free-shipping-bar">
+      <div id="shipping-progress-text" class="text-xs text-gray-700"></div>
+      <div class="progress-track">
+        <div id="shipping-progress-bar" class="progress-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div id="cart-drawer-items" class="flex-1 overflow-y-auto p-4"></div>
+    <div id="cart-drawer-empty" class="flex-1 flex flex-col items-center justify-center p-6 text-center text-gray-500" style="display: none;">
+      <span class="material-symbols-outlined text-5xl text-gray-300 mb-2">shopping_bag</span>
+      <h4 class="font-bold text-sm text-gray-700">سلتك فارغة</h4>
+    </div>
+    <div id="cart-drawer-footer" class="p-4 bg-white border-t border-[#e8e4dc]">
+      <div class="flex justify-between items-baseline mb-4">
+        <span class="text-xs font-bold text-gray-500">المجموع الفرعي</span>
+        <span id="cart-drawer-subtotal" class="font-bold text-lg text-[#98440b] font-display">0 ج.م</span>
+      </div>
+      <a href="checkout.html" class="w-full btn-primary py-3 text-sm flex items-center justify-center gap-2">
+        <span>متابعة إتمام الطلب</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_left_alt</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ==================== زر الواتساب العائم للتواصل الفوري ==================== -->
+  <a href="https://wa.me/201098765432?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%82%D8%B7%D8%B9%D8%A9%20%D9%8A%D8%AF%D9%88%D9%8A%D8%A9%20%D9%85%D9%86%20%D8%BA%D9%8F%D9%80%D8%B1%D9%92%D8%B2%D9%8E%D8%A9" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="fixed bottom-6 left-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:bg-[#20ba59] transition-all transform hover:scale-105 animate-radar" 
+     title="تواصل معنا عبر واتساب">
+    <span class="material-symbols-outlined text-2xl">chat</span>
+    <span class="text-xs font-bold hidden sm:inline">محادثة الأتيليه</span>
+  </a>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    let currentProduct = null;
+    let currentQty = 1;
+
+    function incrementQty() {
+      currentQty++;
+      document.getElementById('selected-qty').textContent = currentQty;
+    }
+
+    function decrementQty() {
+      if (currentQty > 1) {
+        currentQty--;
+        document.getElementById('selected-qty').textContent = currentQty;
+      }
+    }
+
+    function switchDisplayImage(url, thumbBtn) {
+      document.getElementById('main-product-img').src = url;
+      document.querySelectorAll('#thumbs-container button').forEach(b => b.classList.remove('ring-2', 'ring-[#98440b]'));
+      if (thumbBtn) thumbBtn.classList.add('ring-2', 'ring-[#98440b]');
+    }
+
+    function handleAddCurrentToCart() {
+      if (!currentProduct) return;
+      const customInput = document.getElementById('product-custom-input');
+      const customNote = customInput ? customInput.value.trim() : '';
+      GhorzaApp.addToCart(currentProduct.id, currentQty, customNote);
+    }
+
+    function handleInstantBuy() {
+      handleAddCurrentToCart();
+      window.location.href = 'checkout.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prodId = urlParams.get('id') || 'emb-001';
+      currentProduct = (window.PRODUCTS || []).find(p => p.id === prodId) || window.PRODUCTS[0];
+
+      if (currentProduct) {
+        document.title = `${currentProduct.name} | غُـرْزَة`;
+        document.getElementById('breadcrumb-category').textContent = currentProduct.craftTypeName;
+        document.getElementById('breadcrumb-title').textContent = currentProduct.name;
+        document.getElementById('product-name').textContent = currentProduct.name;
+        document.getElementById('product-desc').textContent = currentProduct.description;
+        document.getElementById('product-craft-badge').textContent = `${currentProduct.craftTypeName} • ${currentProduct.ageGroupName}`;
+        document.getElementById('product-rating').textContent = currentProduct.rating;
+        document.getElementById('product-reviews-count').textContent = `(${currentProduct.reviewsCount} تقييم)`;
+        document.getElementById('product-price').textContent = currentProduct.price.toLocaleString('ar-EG');
+
+        if (currentProduct.comparePrice) {
+          const cp = document.getElementById('product-compare-price');
+          cp.textContent = `${currentProduct.comparePrice.toLocaleString('ar-EG')} ج.م`;
+          cp.style.display = 'inline';
+        }
+
+        if (currentProduct.badge) {
+          document.getElementById('product-badge-overlay').textContent = currentProduct.badge;
+        } else {
+          document.getElementById('product-badge-overlay').style.display = 'none';
+        }
+
+        document.getElementById('main-product-img').src = currentProduct.images[0];
+        document.getElementById('main-product-img').alt = currentProduct.name;
+
+        // المصغرات
+        const thumbs = document.getElementById('thumbs-container');
+        thumbs.innerHTML = currentProduct.images.map((imgUrl, i) => `
+          <button onclick="switchDisplayImage('${imgUrl}', this)" class="aspect-square rounded-lg overflow-hidden bg-[#f5f3ef] border border-[#e8e4dc] ${i === 0 ? 'ring-2 ring-[#98440b]' : ''}">
+            <img src="${imgUrl}" alt="${currentProduct.name}" class="w-full h-full object-cover">
+          </button>
+        `).join('');
+
+        // المواصفات
+        document.getElementById('spec-materials').textContent = currentProduct.details.materials || 'خامات طبيعية 100%';
+        document.getElementById('spec-dimensions').textContent = currentProduct.details.dimensions || 'مقاس قياسي مريح';
+        document.getElementById('spec-care').textContent = currentProduct.details.careInstructions || 'تنظيف لطيف باليد';
+
+        // قطع مشابهة
+        const related = (window.PRODUCTS || []).filter(p => p.id !== currentProduct.id && (p.craftType === currentProduct.craftType || p.ageGroup === currentProduct.ageGroup)).slice(0, 4);
+        const relatedGrid = document.getElementById('related-products-grid');
+        if (relatedGrid) {
+          relatedGrid.innerHTML = related.map(p => `
+            <div class="product-card">
+              <div class="product-image-wrap">
+                <img src="${p.images[0]}" alt="${p.name}">
+              </div>
+              <div class="p-3 text-right">
+                <span class="text-xs text-[#98440b] font-bold block">${p.craftTypeName}</span>
+                <h4 class="font-bold text-sm text-[#1b1c1a] truncate"><a href="product.html?id=${p.id}">${p.name}</a></h4>
+                <div class="flex items-baseline justify-between mt-2">
+                  <span class="font-bold text-sm text-[#98440b]">${p.price.toLocaleString('ar-EG')} ج.م</span>
+                  <a href="product.html?id=${p.id}" class="text-xs font-semibold text-gray-700 hover:text-[#98440b]">عرض القطعة</a>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

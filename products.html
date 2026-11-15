@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المجموعة الكاملة للمشغولات اليدوية | غُـرْزَة — Ghorza Craft Studio</title>
+  
+  <!-- الخطوط والأيقونات -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS & Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-[#fbf9f5] text-[#1b1c1a] antialiased">
+
+  <!-- ==================== الشريط العلوي ==================== -->
+  <aside class="bg-[#b85c24] text-white text-xs font-semibold py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2">
+    <span>✨ شحن مجاني لكافة محافظات مصر للطلبات فوق 1,500 ج.م</span>
+    <span class="opacity-60">•</span>
+    <span>دفع عند الاستلام مع إمكانية المعاينة قبل الاستلام</span>
+  </aside>
+
+  <!-- ==================== الهيدر ==================== -->
+  <header class="sticky top-0 z-40 bg-[#fbf9f5]/90 backdrop-blur-md border-b border-[#e8e4dc]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-xl shadow-sm font-display">
+          غ
+        </div>
+        <div class="flex flex-col text-right">
+          <span class="font-display font-extrabold text-2xl text-[#98440b] tracking-tight leading-none">غُـرْزَة</span>
+          <span class="text-[11px] text-[#55433a] font-medium mt-0.5">مشغولات يدوية مصرية أصيلة</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-[#55433a]">
+        <a href="index.html" class="hover:text-[#98440b] transition-colors">الرئيسية</a>
+        <a href="products.html" class="text-[#98440b] font-bold">المجموعة الكاملة</a>
+        <a href="craft-story.html" class="hover:text-[#98440b] transition-colors">حكاية الصنعة</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="products.html" aria-label="المفضلة" class="relative w-10 h-10 rounded-full flex items-center justify-center text-gray-700 hover:bg-[#efeeea]">
+          <span class="material-symbols-outlined text-[20px]">favorite</span>
+          <span class="wishlist-count-badge absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-600 text-white text-[10px] items-center justify-center font-bold" style="display: none;">0</span>
+        </a>
+
+        <button onclick="GhorzaApp.openCartDrawer()" class="flex items-center gap-2 bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#1b1c1a] px-3.5 py-2 rounded-xl border border-[#e8e4dc]">
+          <span class="material-symbols-outlined text-[20px] text-[#98440b]">shopping_bag</span>
+          <span class="text-xs font-bold hidden sm:inline">السلة</span>
+          <span class="cart-count-badge bg-[#98440b] text-white text-xs px-2 py-0.5 rounded-full font-bold" style="display: none;">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== رأس المعرض وتوجيه المسار ==================== -->
+  <section class="bg-[#efeeea]/60 py-8 border-b border-[#e8e4dc]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-right">
+      
+      <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+        <a href="index.html" class="hover:text-[#98440b]">الرئيسية</a>
+        <span>/</span>
+        <span class="text-[#1b1c1a] font-bold">معرض الحرف والمشغولات اليدوية</span>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-[#1b1c1a]">المجموعة المصنوعة يدوياً</h1>
+          <p class="text-xs sm:text-sm text-[#55433a] mt-1">تصفح كافة القطع المجهزة بأيدي صانعات وصناع مصر، واختر الحرفة والفئة العمرية المناسبة لك.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs bg-white px-3 py-1.5 rounded-lg border border-[#e8e4dc] self-start md:self-auto">
+          <span class="material-symbols-outlined text-[#98440b] text-[18px]">verified</span>
+          <span>كل قطعة تُصنع بطلبك مع إمكانية التخصيص</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== مساحة العرض والفلاتر ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- صندوق الفلاتر الشامل (نوع الحرفة + الفئة العمرية + البحث والترتيب) -->
+    <div class="bg-white p-5 rounded-2xl border border-[#e8e4dc] shadow-sm mb-10 space-y-5">
+      
+      <!-- الصف 1: نوع الحرفة اليدوية -->
+      <div>
+        <span class="text-xs font-bold text-gray-500 block mb-2 text-right">نوع الهاند ميد:</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button data-craft-filter="all" class="badge-craft active px-3.5 py-2 text-xs font-bold transition-all">الكل</button>
+          <button data-craft-filter="embroidery" class="badge-craft px-3.5 py-2 text-xs font-bold transition-all flex items-center gap-1">
+            <span>🧵</span>
+            <span>تطريز يدوي</span>
+          </button>
+          <button data-craft-filter="crochet" class="badge-craft px-3.5 py-2 text-xs font-bold transition-all flex items-center gap-1">
+            <span>🧶</span>
+            <span>كروشيه وتريكو</span>
+          </button>
+          <button data-craft-filter="gift_hoops" class="badge-craft px-3.5 py-2 text-xs font-bold transition-all flex items-center gap-1">
+            <span>🎁</span>
+            <span>طارات هدايا ومكرميات</span>
+          </button>
+          <button data-craft-filter="beaded" class="badge-craft px-3.5 py-2 text-xs font-bold transition-all flex items-center gap-1">
+            <span>✨</span>
+            <span>إكسسوارات خرز</span>
+          </button>
+          <button data-craft-filter="resin" class="badge-craft px-3.5 py-2 text-xs font-bold transition-all flex items-center gap-1">
+            <span>💎</span>
+            <span>فن الريزن والديكور</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="border-t border-[#f0ede6]"></div>
+
+      <!-- الصف 2: الفئة العمرية والبحث والترتيب -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        
+        <!-- أزرار الفئة العمرية -->
+        <div class="flex items-center gap-2 flex-wrap text-right">
+          <span class="text-xs font-bold text-gray-500 pl-1">الفئة العمرية:</span>
+          <button data-age-filter="all" class="badge-craft active px-3 py-1.5 text-xs font-semibold">جميع الأعمار</button>
+          <button data-age-filter="kids" class="badge-craft px-3 py-1.5 text-xs font-semibold">👶 أطفال ومواليد</button>
+          <button data-age-filter="teens" class="badge-craft px-3 py-1.5 text-xs font-semibold">👧 صبايا وشباب</button>
+          <button data-age-filter="adults" class="badge-craft px-3 py-1.5 text-xs font-semibold">👩‍💼 كبار والجميع</button>
+        </div>
+
+        <!-- البحث والترتيب والعدد -->
+        <div class="flex items-center gap-3 justify-between lg:justify-end">
+          <div class="relative w-44 sm:w-60">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="ابحث بالاسم أو الخامة..." 
+              class="w-full bg-[#f5f3ef] text-xs px-3 py-2 rounded-lg text-right focus:outline-none focus:ring-1 focus:ring-[#98440b]"
+            />
+            <span class="material-symbols-outlined absolute left-2.5 top-2 text-gray-400 text-[18px]">search</span>
+          </div>
+
+          <select id="sort-select" class="bg-[#f5f3ef] text-xs font-bold px-3 py-2 rounded-lg text-[#1b1c1a] border border-transparent focus:outline-none cursor-pointer">
+            <option value="popular">الأكثر طلباً</option>
+            <option value="newest">الأحدث بالورشة</option>
+            <option value="price-asc">السعر: من الأقل</option>
+            <option value="price-desc">السعر: من الأعلى</option>
+          </select>
+
+          <span id="products-count" class="text-xs font-bold text-[#98440b] whitespace-nowrap">-- قطعة</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- شبكة المنتجات -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+  </main>
+
+  <!-- ==================== الفوتر ==================== -->
+  <footer class="bg-[#f5f3ef] border-t border-[#e8e4dc] py-8 text-right text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center">
+      <p>© 2026 غُـرْزَة | Ghorza Craft Studio. جميع الحقوق محفوظة.</p>
+      <div class="mt-2 sm:mt-0 flex justify-center gap-4">
+        <a href="index.html" class="hover:text-[#98440b]">الرئيسية</a>
+        <span>•</span>
+        <a href="craft-story.html" class="hover:text-[#98440b]">قصة الصنعة</a>
+        <span>•</span>
+        <a href="checkout.html" class="hover:text-[#98440b]">إتمام الطلب</a>
+        <span>•</span>
+        <a href="dashboard.html" class="hover:text-[#98440b] font-bold text-[#98440b]">لوحة الإدارة</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== السلة المنبثقة ==================== -->
+  <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="GhorzaApp.closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="p-4 bg-white border-b border-[#e8e4dc] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#98440b]">shopping_bag</span>
+        <h3 class="font-bold text-base text-[#1b1c1a]">سلة المقتنيات</h3>
+      </div>
+      <button onclick="GhorzaApp.closeCartDrawer()" class="w-8 h-8 rounded-full bg-[#f5f3ef] flex items-center justify-center text-gray-600">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    </div>
+    <div class="free-shipping-bar">
+      <div id="shipping-progress-text" class="text-xs text-gray-700"></div>
+      <div class="progress-track">
+        <div id="shipping-progress-bar" class="progress-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div id="cart-drawer-items" class="flex-1 overflow-y-auto p-4"></div>
+    <div id="cart-drawer-empty" class="flex-1 flex flex-col items-center justify-center p-6 text-center text-gray-500" style="display: none;">
+      <span class="material-symbols-outlined text-5xl text-gray-300 mb-2">shopping_bag</span>
+      <h4 class="font-bold text-sm text-gray-700">سلتك فارغة</h4>
+      <p class="text-xs text-gray-500 mt-1">اختر من قطعنا الحرفية لإضافتها إلى سلتك</p>
+    </div>
+    <div id="cart-drawer-footer" class="p-4 bg-white border-t border-[#e8e4dc]">
+      <div class="flex justify-between items-baseline mb-4">
+        <span class="text-xs font-bold text-gray-500">المجموع الفرعي</span>
+        <span id="cart-drawer-subtotal" class="font-bold text-lg text-[#98440b] font-display">0 ج.م</span>
+      </div>
+      <a href="checkout.html" class="w-full btn-primary py-3 text-sm flex items-center justify-center gap-2">
+        <span>متابعة إتمام الطلب</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_left_alt</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ==================== زر الواتساب العائم للتواصل الفوري ==================== -->
+  <a href="https://wa.me/201098765432?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%82%D8%B7%D8%B9%D8%A9%20%D9%8A%D8%AF%D9%88%D9%8A%D8%A9%20%D9%85%D9%86%20%D8%BA%D9%8F%D9%80%D8%B1%D9%92%D8%B2%D9%8E%D8%A9" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="fixed bottom-6 left-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:bg-[#20ba59] transition-all transform hover:scale-105 animate-radar" 
+     title="تواصل معنا عبر واتساب">
+    <span class="material-symbols-outlined text-2xl">chat</span>
+    <span class="text-xs font-bold hidden sm:inline">محادثة الأتيليه</span>
+  </a>
+
+  <!-- ==================== نافذة المعاينة السريعة ==================== -->
+  <div id="quickview-modal" class="modal-overlay" onclick="if(event.target === this) GhorzaApp.closeQuickView()">
+    <div id="quickview-modal-content" class="modal-content"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="chatbot.js"></script>
+  <script>
+    // تفعيل فلتر الرابط إن وُجد بارامتر craft في الـ URL
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const craftParam = urlParams.get('craft');
+      if (craftParam) {
+        const btn = document.querySelector(`[data-craft-filter="${craftParam}"]`);
+        if (btn) btn.click();
+      }
+    });
+  </script>
+</body>
+</html>
