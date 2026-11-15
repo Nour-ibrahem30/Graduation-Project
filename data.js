@@ -59,8 +59,8 @@ const PRODUCTS = [
     price: 650,
     comparePrice: 750,
     images: [
-      'assets/embroidery/embroidery-2.jpg',
-      'assets/embroidery/embroidery-1.jpg'
+      '/assets/embroidery/embroidery-2.jpg',
+      '/assets/embroidery/embroidery-1.jpg'
     ],
     badge: 'الأكثر إعجاباً',
     inStock: true,
@@ -86,8 +86,8 @@ const PRODUCTS = [
     price: 720,
     comparePrice: null,
     images: [
-      'assets/embroidery/embroidery-5.jpg',
-      'assets/embroidery/embroidery-3.jpg'
+      '/assets/embroidery/embroidery-5.jpg',
+      '/assets/embroidery/embroidery-3.jpg'
     ],
     badge: 'قطعة فنية مميزة',
     inStock: true,
@@ -112,8 +112,8 @@ const PRODUCTS = [
     price: 480,
     comparePrice: 550,
     images: [
-      'assets/gift_hoops/gift-13.jpg',
-      'assets/embroidery/embroidery-6.jpg'
+      '/assets/gift_hoops/gift-13.jpg',
+      '/assets/embroidery/embroidery-6.jpg'
     ],
     badge: 'مناسبة لغرف الأطفال',
     inStock: true,
@@ -141,8 +141,8 @@ const PRODUCTS = [
     price: 1850,
     comparePrice: 2200,
     images: [
-      'assets/crochet/crochet-8.jpg',
-      'assets/crochet/crochet-1.jpg'
+      '/assets/crochet/crochet-8.jpg',
+      '/assets/crochet/crochet-1.jpg'
     ],
     badge: 'التريند الأكثر مبيعاً',
     inStock: true,
@@ -168,8 +168,8 @@ const PRODUCTS = [
     price: 790,
     comparePrice: 920,
     images: [
-      'assets/crochet/crochet-14.jpg',
-      'assets/crochet/crochet-3.jpg'
+      '/assets/crochet/crochet-14.jpg',
+      '/assets/crochet/crochet-3.jpg'
     ],
     badge: 'قطعة مناسبات وسهرات',
     inStock: true,
@@ -195,8 +195,8 @@ const PRODUCTS = [
     price: 340,
     comparePrice: 400,
     images: [
-      'assets/crochet/crochet-2.jpg',
-      'assets/crochet/crochet-4.jpg'
+      '/assets/crochet/crochet-2.jpg',
+      '/assets/crochet/crochet-4.jpg'
     ],
     badge: 'عملي ولطيف للشتاء',
     inStock: true,
@@ -224,8 +224,8 @@ const PRODUCTS = [
     price: 850,
     comparePrice: 980,
     images: [
-      'assets/gift_hoops/gift-2.jpg',
-      'assets/gift_hoops/gift-1.jpg'
+      '/assets/gift_hoops/gift-2.jpg',
+      '/assets/gift_hoops/gift-1.jpg'
     ],
     badge: 'الهدية المثالية للبيت الجديد',
     inStock: true,
@@ -251,8 +251,8 @@ const PRODUCTS = [
     price: 590,
     comparePrice: null,
     images: [
-      'assets/gift_hoops/gift-7.jpg',
-      'assets/gift_hoops/gift-8.jpg'
+      '/assets/gift_hoops/gift-7.jpg',
+      '/assets/gift_hoops/gift-8.jpg'
     ],
     badge: 'هدية الصديقة المفضلة',
     inStock: true,
@@ -278,8 +278,8 @@ const PRODUCTS = [
     price: 950,
     comparePrice: 1100,
     images: [
-      'assets/gift_hoops/gift-1.jpg',
-      'assets/gift_hoops/gift-3.jpg'
+      '/assets/gift_hoops/gift-1.jpg',
+      '/assets/gift_hoops/gift-3.jpg'
     ],
     badge: 'ديكور بوهيمي راقي',
     inStock: true,
@@ -306,8 +306,8 @@ const PRODUCTS = [
     price: 180,
     comparePrice: 240,
     images: [
-      'assets/beaded/beaded-2.jpg',
-      'assets/beaded/beaded-1.jpg'
+      '/assets/beaded/beaded-2.jpg',
+      '/assets/beaded/beaded-1.jpg'
     ],
     badge: 'أكثر من 8 ألوان مبهجة',
     inStock: true,
@@ -333,8 +333,8 @@ const PRODUCTS = [
     price: 320,
     comparePrice: 380,
     images: [
-      'assets/beaded/beaded-1.jpg',
-      'assets/beaded/beaded-3.jpg'
+      '/assets/beaded/beaded-1.jpg',
+      '/assets/beaded/beaded-3.jpg'
     ],
     badge: 'إطلالة صيفية عصرية',
     inStock: true,
@@ -359,8 +359,8 @@ const PRODUCTS = [
     price: 120,
     comparePrice: null,
     images: [
-      'assets/beaded/beaded-4.jpg',
-      'assets/beaded/beaded-2.jpg'
+      '/assets/beaded/beaded-4.jpg',
+      '/assets/beaded/beaded-2.jpg'
     ],
     badge: 'آمنة ومريحة للأطفال',
     inStock: true,
@@ -388,8 +388,8 @@ const PRODUCTS = [
     price: 490,
     comparePrice: 580,
     images: [
-      'assets/resin/resin-1.jpg',
-      'assets/resin/resin-2.jpg'
+      '/assets/resin/resin-1.jpg',
+      '/assets/resin/resin-2.jpg'
     ],
     badge: 'ضيافة ملكية فاخرة',
     inStock: true,
@@ -415,8 +415,8 @@ const PRODUCTS = [
     price: 160,
     comparePrice: 200,
     images: [
-      'assets/resin/resin-10.jpg',
-      'assets/resin/resin-3.jpg'
+      '/assets/resin/resin-10.jpg',
+      '/assets/resin/resin-3.jpg'
     ],
     badge: 'عشق القراء والكتب',
     inStock: true,
@@ -442,8 +442,8 @@ const PRODUCTS = [
     price: 1350,
     comparePrice: 1550,
     images: [
-      'assets/resin/resin-17.jpg',
-      'assets/resin/resin-4.jpg'
+      '/assets/resin/resin-17.jpg',
+      '/assets/resin/resin-4.jpg'
     ],
     badge: 'ديكور منزلي راقي (5 قطع)',
     inStock: true,
