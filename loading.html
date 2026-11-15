@@ -1,31 +1,490 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fbf9f5" />
-  <title>غُرْزَة — لحظة ونكون جاهزين</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#26170d" />
+  <title>غُـرْزَة | جاري تجهيز الأتيليه الحرفي...</title>
+
+  <!-- الخطوط العربية الراقية والأيقونات -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=Amiri:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
   <style>
-    body{min-height:100vh;display:grid;place-items:center;background:#fbf9f5;color:#1b1c1a}
-    .loading-card{width:min(420px,calc(100% - 40px));text-align:center}
-    .loading-mark{width:58px;height:58px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:#98440b;color:white;font-size:26px;font-weight:800;animation:breathe 1.2s ease-in-out infinite alternate}
-    .loading-card h1{font-size:23px;margin:0 0 7px;color:#98440b}
-    .loading-card p{font-size:12px;color:#77766e;margin:0 0 24px}
-    .loading-track{height:5px;overflow:hidden;background:#e7e3da;border-radius:5px}
-    .loading-track span{display:block;width:35%;height:100%;background:#b85c24;border-radius:5px;animation:travel 1.2s ease-in-out infinite alternate}
-    @keyframes travel{from{transform:translateX(185%)}to{transform:translateX(-20%)}}
-    @keyframes breathe{to{transform:scale(1.06);opacity:.82}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+    :root {
+      --terracotta: #98440b;
+      --terracotta-light: #c86321;
+      --terracotta-dark: #6e2f06;
+      --sand: #fbf9f5;
+      --sand-dark: #f0ede5;
+      --gold: #d4a359;
+      --gold-glow: rgba(212, 163, 89, 0.35);
+      --charcoal: #1f1d1a;
+      --muted: #8b7d73;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: radial-gradient(circle at 50% 30%, #3d2314 0%, #20130b 55%, #140b06 100%);
+      color: #fff;
+      font-family: 'Noto Kufi Arabic', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* خلفية حرفية متحركة بأشكال الخيوط والنجوم */
+    .ambient-glow {
+      position: absolute;
+      width: min(600px, 90vw);
+      height: min(600px, 90vw);
+      background: radial-gradient(circle, rgba(200, 99, 33, 0.22) 0%, rgba(212, 163, 89, 0.08) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+
+    .particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(212, 163, 89, 0.4), transparent),
+        radial-gradient(2px 2px at 80px 120px, rgba(255, 255, 255, 0.25), transparent),
+        radial-gradient(1.5px 1.5px at 160px 70px, rgba(200, 99, 33, 0.4), transparent),
+        radial-gradient(2px 2px at 240px 190px, rgba(212, 163, 89, 0.3), transparent);
+      background-size: 280px 280px;
+      opacity: 0.7;
+      animation: drift 25s linear infinite;
+    }
+
+    /* بطاقة التحميل الزجاجية الفخمة */
+    .loader-card {
+      position: relative;
+      z-index: 2;
+      width: min(440px, 100%);
+      background: rgba(36, 22, 14, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 163, 89, 0.22);
+      border-radius: 28px;
+      padding: 42px 32px 34px;
+      text-align: center;
+      box-shadow: 
+        0 25px 60px -15px rgba(0, 0, 0, 0.65),
+        0 0 40px -10px rgba(152, 68, 11, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      animation: cardAppear 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* طارة التطريز ثلاثية الأبعاد التفاعلية */
+    .hoop-container {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .embroidery-hoop {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid #b87a40;
+      box-shadow: 
+        inset 0 0 12px rgba(0,0,0,0.5),
+        0 0 0 2px rgba(212, 163, 89, 0.4),
+        0 8px 24px rgba(0,0,0,0.4);
+      animation: rotateHoop 20s linear infinite;
+    }
+
+    .embroidery-hoop::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 10px;
+      background: #d4a359;
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* حلقة الغرز المتحركة */
+    .stitch-circle {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 225, 185, 0.7);
+      animation: rotateHoopReverse 14s linear infinite;
+    }
+
+    .brand-symbol {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b85c24 0%, #823405 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 800;
+      font-family: 'Bricolage Grotesque', 'Noto Kufi Arabic', serif;
+      box-shadow: 
+        0 6px 18px rgba(152, 68, 11, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 1;
+      animation: pulseSymbol 2.4s ease-in-out infinite;
+    }
+
+    /* اسم الشعار */
+    .brand-title {
+      font-family: 'Bricolage Grotesque', 'Noto Kufi Arabic', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 30%, #e6caa3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .brand-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #d4a359;
+      background: rgba(212, 163, 89, 0.12);
+      border: 1px solid rgba(212, 163, 89, 0.25);
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      letter-spacing: 0.3px;
+    }
+
+    /* نص المرحلة الحالية */
+    .stage-wrapper {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .stage-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5ded7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.35s ease;
+    }
+
+    .stage-icon {
+      font-size: 18px;
+      color: #d4a359;
+      animation: spinSmall 3s linear infinite;
+    }
+
+    /* شريط التقدم السائل */
+    .progress-box {
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 163, 89, 0.2);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+      padding: 1px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #98440b, #d4a359, #f7d28b);
+      border-radius: 999px;
+      box-shadow: 0 0 16px rgba(212, 163, 89, 0.6);
+      transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #a89a8f;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .percent-number {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #f7d28b;
+    }
+
+    /* أزرار الإجراء السريع */
+    .actions-row {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .skip-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #d1c4b8;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 7px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .skip-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: rgba(212, 163, 89, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* وسوم الحرف في الأسفل */
+    .craft-chips {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 28px;
+      max-width: 420px;
+    }
+
+    .chip {
+      font-size: 10px;
+      font-weight: 600;
+      color: #bdaea3;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* الرسوم المتحركة الكيميائية */
+    @keyframes pulseGlow {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      100% { transform: scale(1.15); opacity: 1; }
+    }
+
+    @keyframes rotateHoop {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateHoopReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    @keyframes pulseSymbol {
+      0%, 100% { transform: scale(1); box-shadow: 0 6px 18px rgba(152, 68, 11, 0.6); }
+      50% { transform: scale(1.05); box-shadow: 0 10px 26px rgba(212, 163, 89, 0.6); }
+    }
+
+    @keyframes cardAppear {
+      from { opacity: 0; transform: translateY(24px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes shimmer {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+
+    @keyframes drift {
+      from { background-position: 0 0; }
+      to { background-position: 280px 560px; }
+    }
+
+    @keyframes spinSmall {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* خروج سلس عند اكتمال التحميل */
+    .fade-out {
+      opacity: 0;
+      transform: scale(0.97) translateY(-10px);
+      transition: all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   </style>
 </head>
 <body>
-  <main class="loading-card" aria-live="polite">
-    <div class="loading-mark" aria-hidden="true">غ</div>
-    <h1>غُرْزَة</h1>
-    <p>بنجهّزلك تجربة تسوّق لطيفة</p>
-    <div class="loading-track" role="progressbar" aria-label="جاري التحميل"><span></span></div>
+
+  <!-- هالة الإضاءة الحرفية الدافئة -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="particles" aria-hidden="true"></div>
+
+  <!-- بطاقة التحميل المركزية -->
+  <main class="loader-card" id="loaderCard" aria-live="polite">
+    
+    <!-- طارة التطريز ثلاثية الأبعاد -->
+    <div class="hoop-container" aria-hidden="true">
+      <div class="embroidery-hoop"></div>
+      <div class="stitch-circle"></div>
+      <div class="brand-symbol">غ</div>
+    </div>
+
+    <!-- اسم المتجر وهوية الحرفة -->
+    <h1 class="brand-title">غُـرْزَة</h1>
+    <div class="brand-tagline">
+      <span>✨</span>
+      <span>مَلتقى الحرف اليدوية المصرية الأصيلة</span>
+    </div>
+
+    <!-- نص المرحلة التفاعلية -->
+    <div class="stage-wrapper">
+      <p class="stage-text" id="stageText">
+        <span class="material-symbols-outlined stage-icon">autorenew</span>
+        <span id="stageLabel">تجهيز الخامات الطبيعية وخيوط القطن المصري...</span>
+      </p>
+    </div>
+
+    <!-- شريط التقدم السائل -->
+    <div class="progress-box">
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-meta">
+        <span>جاري التحميل...</span>
+        <div><span class="percent-number" id="percentNumber">0</span><span style="color:#d4a359; font-weight:800;">%</span></div>
+      </div>
+    </div>
+
+    <!-- زر التخطي المباشر -->
+    <div class="actions-row">
+      <a href="index.html" class="skip-btn" id="enterBtn">
+        <span>دخول الأتيليه الآن</span>
+        <span class="material-symbols-outlined" style="font-size:14px;">arrow_back</span>
+      </a>
+    </div>
+
   </main>
-  <script>window.setTimeout(() => { window.location.href = 'index.html'; }, 900);</script>
+
+  <!-- وسوم الحرف اليدوية في الأسفل -->
+  <footer class="craft-chips" aria-hidden="true">
+    <span class="chip">🧵 تطريز يدوي</span>
+    <span class="chip">🧶 كروشيه وتريكو</span>
+    <span class="chip">🎨 فن الريزن والديكور</span>
+    <span class="chip">💎 إكسسوارات خرز</span>
+    <span class="chip">🎁 طارات ومكرميات</span>
+  </footer>
+
+  <script>
+    (function() {
+      const fill = document.getElementById('progressFill');
+      const track = document.getElementById('progressTrack');
+      const percentEl = document.getElementById('percentNumber');
+      const stageLabel = document.getElementById('stageLabel');
+      const card = document.getElementById('loaderCard');
+
+      const stages = [
+        "تجهيز الخامات الطبيعية وخيوط القطن المصري...",
+        "شدّ الأقمشة على طارات خشب الزان المعتق...",
+        "حياكة التفاصيل وتنسيق درجات الألوان...",
+        "صقل قطع الريزن وتركيب أساور الخرز...",
+        "تجهيز بطاقات الإهداء والتغليف الحرفي...",
+        "أهلاً بك في فضاء غُـرْزَة للإبداع اليدوي ✨"
+      ];
+
+      let progress = 0;
+      let stageIndex = 0;
+
+      // محاكاة تحميل حرفية ناعمة ذات مظهر واقعي
+      const timer = setInterval(() => {
+        // زيادة ديناميكية
+        const increment = Math.floor(Math.random() * 8) + 4;
+        progress = Math.min(progress + increment, 100);
+
+        fill.style.width = progress + '%';
+        track.setAttribute('aria-valuenow', progress);
+        percentEl.textContent = progress;
+
+        // تحديث مرحلة الصنعة
+        const nextStageIdx = Math.min(
+          Math.floor((progress / 100) * stages.length),
+          stages.length - 1
+        );
+
+        if (nextStageIdx !== stageIndex) {
+          stageIndex = nextStageIdx;
+          stageLabel.style.opacity = '0';
+          setTimeout(() => {
+            stageLabel.textContent = stages[stageIndex];
+            stageLabel.style.opacity = '1';
+          }, 150);
+        }
+
+        // عند الوصول إلى 100%
+        if (progress >= 100) {
+          clearInterval(timer);
+          setTimeout(() => {
+            card.classList.add('fade-out');
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 450);
+          }, 350);
+        }
+      }, 50);
+    })();
+  </script>
 </body>
 </html>

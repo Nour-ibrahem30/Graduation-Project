@@ -20,20 +20,24 @@
 
   <!-- ==================== شاشة التحميل التفاعلية الأولية (Atelier Preloader) ==================== -->
   <div id="atelier-preloader">
-    <div class="flex flex-col items-center max-w-sm text-center">
-      <!-- شعار المتجر -->
-      <div class="w-16 h-16 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-2xl shadow-xl font-display mb-4 animate-bounce">
-        غ
+    <div class="relative z-10 flex flex-col items-center max-w-sm text-center px-4">
+      <!-- طارة التطريز المتوهجة -->
+      <div class="relative w-20 h-20 mb-4 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full border-2 border-[#b87a40] shadow-md animate-rotate-slow"></div>
+        <div class="absolute inset-1.5 rounded-full border border-dashed border-[#d4a359]/70 animate-rotate-slow" style="animation-direction: reverse; animation-duration: 12s;"></div>
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#98440b] to-[#723207] text-white flex items-center justify-center font-bold text-xl shadow-lg font-display">
+          غ
+        </div>
       </div>
-      <h2 class="font-display font-extrabold text-2xl text-[#98440b] tracking-tight mb-1">أتيليه غُـرْزَة</h2>
-      <span class="text-[11px] text-[#897268] font-semibold mb-3 tracking-wide">صناعة يدوية مصرية أصيلة</span>
-      <p id="preloader-stage" class="text-xs text-[#1b1c1a] font-bold min-h-[1.5rem] mb-4 transition-all">جاري تجهيز الخامات الطبيعية...</p>
+      <h2 class="font-display font-extrabold text-2xl text-[#1b1c1a] tracking-tight mb-0.5">أتيليه غُـرْزَة</h2>
+      <span class="text-[11px] text-[#98440b] font-bold mb-3 tracking-wide bg-[#ffdbca]/60 px-3 py-0.5 rounded-full">صناعة يدوية مصرية أصيلة</span>
+      <p id="preloader-stage" class="text-xs text-[#55433a] font-semibold min-h-[1.5rem] mb-3 transition-all">جاري تجهيز الخامات الطبيعية...</p>
 
-      <!-- شريط التحميل التكتيلي -->
-      <div class="w-64 h-3 bg-[#e4e2de] rounded-full p-0.5 relative overflow-hidden border border-[#dcc1b5] mb-2 shadow-inner">
-        <div id="preloader-fill" class="h-full bg-gradient-to-r from-[#98440b] to-[#b85c24] rounded-full transition-all duration-150" style="width: 0%;"></div>
+      <!-- شريط التحميل -->
+      <div class="w-64 h-2.5 bg-[#e8e4dc] rounded-full p-0.5 relative overflow-hidden border border-[#d8d3c8] mb-2 shadow-inner">
+        <div id="preloader-fill" class="h-full bg-gradient-to-r from-[#98440b] via-[#d4a359] to-[#b85c24] rounded-full transition-all duration-150 relative" style="width: 0%;"></div>
       </div>
-      <div class="flex items-center gap-1 text-xs font-bold text-[#897268]">
+      <div class="flex items-center gap-1 text-xs font-extrabold text-[#98440b] font-display">
         <span id="preloader-percentage">0</span>%
       </div>
     </div>
@@ -515,16 +519,6 @@
 
     </div>
   </footer>
-
-  <!-- ==================== زر الواتساب العائم للتواصل الفوري ==================== -->
-  <a href="https://wa.me/201098765432?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%82%D8%B7%D8%B9%D8%A9%20%D9%8A%D8%AF%D9%88%D9%8A%D8%A9%20%D9%85%D9%86%20%D8%BA%D9%8F%D9%80%D8%B1%D9%92%D8%B2%D9%8E%D8%A9" 
-     target="_blank" 
-     rel="noopener noreferrer"
-     class="fixed bottom-6 left-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:bg-[#20ba59] transition-all transform hover:scale-105 animate-radar" 
-     title="تواصل معنا عبر واتساب">
-    <span class="material-symbols-outlined text-2xl">chat</span>
-    <span class="text-xs font-bold hidden sm:inline">محادثة الأتيليه</span>
-  </a>
 
   <!-- ==================== سلة التسوق المنبثقة (CART DRAWER) ==================== -->
   <div id="cart-drawer-overlay" class="cart-drawer-overlay" onclick="GhorzaApp.closeCartDrawer()"></div>

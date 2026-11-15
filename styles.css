@@ -549,7 +549,7 @@ button:active {
 #atelier-preloader {
   position: fixed;
   inset: 0;
-  background-color: var(--surface);
+  background: radial-gradient(circle at 50% 45%, #fbf9f5 0%, #ede7dc 100%);
   z-index: 9999;
   display: flex;
   flex-direction: column;

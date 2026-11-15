@@ -3,100 +3,313 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة التحكم وإدارة الطلبات | غُـرْزَة — Ghorza Craft Studio</title>
-  
+  <title>لوحة القيادة وإدارة الطلبات | غُـرْزَة — Ghorza Craft Studio</title>
+
+  <!-- الخطوط العربية والأيقونات -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  
+
+  <!-- Tailwind CSS & Styles -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* تحسينات بصرية خاصة بلوحة التحكم الإدارية */
+    .kpi-card {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px -10px rgba(152, 68, 11, 0.12);
+    }
+    .status-pill {
+      font-weight: 700;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-waybill, #printable-waybill * {
+        visibility: visible;
+      }
+      #printable-waybill {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white;
+        padding: 20px;
+        z-index: 99999;
+      }
+    }
+  </style>
 </head>
-<body class="bg-[#f5f3ef] text-[#1b1c1a] antialiased">
+<body class="bg-[#f7f5f0] text-[#1b1c1a] antialiased min-h-screen flex flex-col font-sans">
 
-  <!-- هيدر لوحة التحكم -->
-  <header class="bg-white border-b border-[#e8e4dc] sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- ==================== 1. الهيدر الإداري العلوي ==================== -->
+  <header class="bg-white border-b border-[#e5e0d7] sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- الهوية وحالة الورشة -->
       <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2">
-          <div class="w-9 h-9 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-lg font-display">غ</div>
-          <span class="font-display font-extrabold text-xl text-[#98440b]">غُـرْزَة</span>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#98440b] to-[#723207] text-white flex items-center justify-center font-bold text-xl shadow-md font-display group-hover:scale-105 transition-transform">
+            غ
+          </div>
+          <div class="flex flex-col text-right">
+            <div class="flex items-center gap-2">
+              <span class="font-display font-extrabold text-2xl text-[#98440b] tracking-tight leading-none">غُـرْزَة</span>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider bg-[#ffdbca] text-[#98440b] px-2 py-0.5 rounded-full">STUDIO ADMIN</span>
+            </div>
+            <span class="text-[11px] text-[#716056] font-medium mt-0.5">لوحة التحكم وإدارة الطلبات الحرفية</span>
+          </div>
         </a>
-        <span class="text-xs bg-[#efeeea] text-[#55433a] font-bold px-2.5 py-1 rounded-full">لوحة الإدارة والطلبات (Dashboard)</span>
+
+        <div class="hidden md:flex items-center gap-2 mr-4 pr-4 border-r border-[#e8e4dc]">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span class="text-xs font-semibold text-emerald-800">ورش المعادي والقاهرة: نشطة الآن</span>
+        </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <button onclick="seedSampleOrders()" class="text-xs bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#98440b] font-bold px-3 py-1.5 rounded-lg border border-[#e8e4dc] flex items-center gap-1">
-          <span class="material-symbols-outlined text-[16px]">add_circle</span>
-          <span>إضافة طلبات تجريبية</span>
+      <!-- الإجراءات السريعة بالأعلى -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- زر إنشاء طلب يدوي -->
+        <button onclick="openNewOrderModal()" class="btn-primary text-xs py-2 px-3.5 flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all">
+          <span class="material-symbols-outlined text-[18px]">add_circle</span>
+          <span class="hidden sm:inline">طلب يدوي جديد</span>
         </button>
-        <a href="index.html" class="btn-primary text-xs py-1.5 px-3 flex items-center gap-1">
-          <span class="material-symbols-outlined text-[16px]">storefront</span>
-          <span>عرض واجهة المتجر</span>
+
+        <!-- زر تصدير CSV -->
+        <button onclick="exportOrdersToCSV()" class="text-xs font-bold bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#55433a] border border-[#e5e0d7] px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors" title="تصدير بيانات الطلبات كملف Excel/CSV">
+          <span class="material-symbols-outlined text-[17px] text-[#98440b]">file_download</span>
+          <span class="hidden md:inline">تصدير CSV</span>
+        </button>
+
+        <!-- إضافة بيانات تجريبية -->
+        <button onclick="seedSampleOrders()" class="text-xs font-bold bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#98440b] border border-[#e5e0d7] px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors" title="إضافة عينات جديدة للتجربة">
+          <span class="material-symbols-outlined text-[17px]">auto_fix_high</span>
+          <span class="hidden lg:inline">عينات تجريبية</span>
+        </button>
+
+        <!-- رابط واجهة المتجر -->
+        <a href="index.html" class="text-xs font-bold text-gray-700 bg-white hover:bg-[#fbf9f5] border border-[#e5e0d7] px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors">
+          <span class="material-symbols-outlined text-[17px] text-gray-600">storefront</span>
+          <span class="hidden sm:inline">عرض المتجر</span>
         </a>
+
       </div>
+
     </div>
   </header>
 
-  <!-- محتوى لوحة التحكم -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-right">
-    
-    <!-- إحصائيات سريعة (Analytics Cards) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <div class="bg-white p-5 rounded-2xl border border-[#e8e4dc] shadow-xs">
-        <span class="text-xs font-bold text-gray-500 block mb-1">إجمالي المبيعات</span>
-        <strong id="stat-revenue" class="font-display font-extrabold text-2xl text-[#98440b]">0 ج.م</strong>
-        <span class="text-[11px] text-emerald-600 block mt-1 flex items-center gap-1">
-          <span class="material-symbols-outlined text-[14px]">trending_up</span>
-          <span>مبيعات موثقة ومؤكدة</span>
-        </span>
-      </div>
+  <!-- ==================== 2. المحتوى الرئيسي ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 text-right w-full">
 
-      <div class="bg-white p-5 rounded-2xl border border-[#e8e4dc] shadow-xs">
-        <span class="text-xs font-bold text-gray-500 block mb-1">إجمالي الطلبات</span>
-        <strong id="stat-orders-count" class="font-display font-extrabold text-2xl text-[#1b1c1a]">0</strong>
-        <span class="text-[11px] text-gray-500 block mt-1">طلب مسجل في النظام</span>
+    <!-- شريط الترحيب والملخص الزمني -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-[#1b1c1a]">نظرة عامة على مبيعات وورش «غُـرْزَة»</h1>
+        <p class="text-xs sm:text-sm text-[#716056] mt-0.5">متابعة دقيقة لكل قطعة يدوية من لحظة حجزها حتى وصولها بيد العميل.</p>
       </div>
-
-      <div class="bg-white p-5 rounded-2xl border border-[#e8e4dc] shadow-xs">
-        <span class="text-xs font-bold text-gray-500 block mb-1">طلبات قيد التجهيز</span>
-        <strong id="stat-pending-count" class="font-display font-extrabold text-2xl text-amber-600">0</strong>
-        <span class="text-[11px] text-gray-500 block mt-1">تنتظر التجهيز في الورشة</span>
-      </div>
-
-      <div class="bg-white p-5 rounded-2xl border border-[#e8e4dc] shadow-xs">
-        <span class="text-xs font-bold text-gray-500 block mb-1">متوسط قيمة الطلب</span>
-        <strong id="stat-avg-order" class="font-display font-extrabold text-2xl text-[#1b1c1a]">0 ج.م</strong>
-        <span class="text-[11px] text-gray-500 block mt-1">لكل عميل</span>
+      <div class="flex items-center gap-2 self-start sm:self-auto bg-white border border-[#e5e0d7] px-3.5 py-1.5 rounded-xl shadow-2xs">
+        <span class="material-symbols-outlined text-[18px] text-[#98440b]">calendar_today</span>
+        <span id="current-date-badge" class="text-xs font-bold text-gray-700">اليوم</span>
       </div>
     </div>
 
-    <!-- جدول إدارة الطلبات -->
-    <div class="bg-white rounded-2xl border border-[#e8e4dc] shadow-sm overflow-hidden">
+    <!-- ==================== 3. بطاقات المؤشرات الرئيسية (KPI Cards) ==================== -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       
-      <!-- شريط أدوات الفلترة والبحث في الطلبات -->
-      <div class="p-5 border-b border-[#f0ede6] flex flex-col md:flex-row md:items-center justify-between gap-4">
-        
-        <!-- فلاتر الحالة -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          <button onclick="filterOrdersByStatus('all', this)" class="badge-craft active px-3 py-1.5 text-xs font-bold">الكل</button>
-          <button onclick="filterOrdersByStatus('pending', this)" class="badge-craft px-3 py-1.5 text-xs font-bold">قيد الانتظار</button>
-          <button onclick="filterOrdersByStatus('processing', this)" class="badge-craft px-3 py-1.5 text-xs font-bold">قيد التجهيز بالورشة</button>
-          <button onclick="filterOrdersByStatus('shipped', this)" class="badge-craft px-3 py-1.5 text-xs font-bold">جاري الشحن</button>
-          <button onclick="filterOrdersByStatus('delivered', this)" class="badge-craft px-3 py-1.5 text-xs font-bold">تم التوصيل</button>
+      <!-- إجمالي المبيعات -->
+      <div class="kpi-card bg-white p-5 rounded-2xl border border-[#e5e0d7] shadow-xs relative overflow-hidden">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs font-bold text-gray-500 block mb-1">إجمالي الإيرادات</span>
+            <strong id="stat-revenue" class="font-display font-extrabold text-2xl text-[#98440b]">0 ج.م</strong>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-[#ffdbca] text-[#98440b] flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-2xl">payments</span>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-[#f2ede4] flex items-center justify-between text-[11px]">
+          <span class="text-emerald-700 font-bold flex items-center gap-0.5">
+            <span class="material-symbols-outlined text-[14px]">trending_up</span>
+            <span>+18.4% هذا الشهر</span>
+          </span>
+          <span class="text-gray-400">مبيعات موثقة</span>
+        </div>
+      </div>
+
+      <!-- إجمالي الطلبات المسجلة -->
+      <div class="kpi-card bg-white p-5 rounded-2xl border border-[#e5e0d7] shadow-xs relative overflow-hidden">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs font-bold text-gray-500 block mb-1">إجمالي الطلبات</span>
+            <strong id="stat-orders-count" class="font-display font-extrabold text-2xl text-[#1b1c1a]">0</strong>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-2xl">inventory_2</span>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-[#f2ede4] flex items-center justify-between text-[11px]">
+          <span class="text-gray-600 font-medium">طلبات مسجلة</span>
+          <span id="stat-completed-ratio" class="text-[#98440b] font-bold">0% نسبة الإنجاز</span>
+        </div>
+      </div>
+
+      <!-- طلبات قيد التجهيز بالورشة -->
+      <div class="kpi-card bg-white p-5 rounded-2xl border border-[#e5e0d7] shadow-xs relative overflow-hidden">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs font-bold text-gray-500 block mb-1">قيد التجهيز بالورشة</span>
+            <strong id="stat-pending-count" class="font-display font-extrabold text-2xl text-amber-600">0</strong>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-2xl">handyman</span>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-[#f2ede4] flex items-center justify-between text-[11px]">
+          <span class="text-amber-700 font-bold flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span>
+            <span>تطريز / كروشيه / ريزن</span>
+          </span>
+          <span class="text-gray-400">تجهيز يدوي</span>
+        </div>
+      </div>
+
+      <!-- متوسط قيمة الطلب -->
+      <div class="kpi-card bg-white p-5 rounded-2xl border border-[#e5e0d7] shadow-xs relative overflow-hidden">
+        <div class="flex items-start justify-between">
+          <div>
+            <span class="text-xs font-bold text-gray-500 block mb-1">متوسط قيمة السلة</span>
+            <strong id="stat-avg-order" class="font-display font-extrabold text-2xl text-[#1b1c1a]">0 ج.م</strong>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-2xl">shopping_cart_checkout</span>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-[#f2ede4] flex items-center justify-between text-[11px]">
+          <span class="text-purple-700 font-bold">لكل عميل بالمتجر</span>
+          <span class="text-gray-400">شحن مجاني فوق 1,500</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== 4. شريط الإحصائيات التفاعلي ومسار الورش ==================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      
+      <!-- بطاقة: توزيع الطلبات حسب نوع الحرفة -->
+      <div class="bg-white p-6 rounded-2xl border border-[#e5e0d7] shadow-xs">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold text-sm text-[#1b1c1a] flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px] text-[#98440b]">category</span>
+            <span>توزيع الطلبات حسب الحرفة</span>
+          </h2>
+          <span class="text-[11px] text-gray-400">النسب المئوية</span>
         </div>
 
-        <!-- البحث في الطلبات -->
-        <div class="relative w-full md:w-72">
+        <div class="space-y-3" id="craft-breakdown-list">
+          <!-- يتولد برمجياً عبر الـ JS -->
+        </div>
+      </div>
+
+      <!-- بطاقة: مسار التجهيز والتوصيل (Fulfillment Pipeline) -->
+      <div class="bg-white p-6 rounded-2xl border border-[#e5e0d7] shadow-xs lg:col-span-2">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold text-sm text-[#1b1c1a] flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px] text-[#98440b]">local_shipping</span>
+            <span>مسار تجهيز وتسليم الطلبات بالورش ومحافظات مصر</span>
+          </h2>
+          <span class="text-[11px] text-gray-400">تحديث فوري</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center" id="pipeline-boxes">
+          <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/60">
+            <span class="text-[11px] font-bold text-amber-800 block">1. بانتظار التأكيد</span>
+            <strong id="pipe-pending-count" class="font-display font-extrabold text-2xl text-amber-900 block mt-1">0</strong>
+            <span class="text-[10px] text-amber-700">مكالمة واتساب</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/60">
+            <span class="text-[11px] font-bold text-blue-800 block">2. قيد التجهيز بالورشة</span>
+            <strong id="pipe-processing-count" class="font-display font-extrabold text-2xl text-blue-900 block mt-1">0</strong>
+            <span class="text-[10px] text-blue-700">شغل يدوي بالخيط</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-purple-50/70 border border-purple-200/60">
+            <span class="text-[11px] font-bold text-purple-800 block">3. جاري الشحن والتوصيل</span>
+            <strong id="pipe-shipped-count" class="font-display font-extrabold text-2xl text-purple-900 block mt-1">0</strong>
+            <span class="text-[10px] text-purple-700">مع المندوب</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/60">
+            <span class="text-[11px] font-bold text-emerald-800 block">4. تم الاستلام بنجاح</span>
+            <strong id="pipe-delivered-count" class="font-display font-extrabold text-2xl text-emerald-900 block mt-1">0</strong>
+            <span class="text-[10px] text-emerald-700">مكتمل ومحصّل</span>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-[#f2ede4] flex flex-wrap items-center justify-between text-xs text-gray-500 gap-2">
+          <span class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-emerald-600">verified</span>
+            <span>نسبة إرضاء العملاء: 99.2% عبر تقييمات المتجر</span>
+          </span>
+          <span class="text-[11px] text-[#98440b] font-bold">شحن سريع داخل القاهرة والجيزة والإسكندرية</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== 5. جدول إدارة الطلبات المتقدم ==================== -->
+    <div class="bg-white rounded-2xl border border-[#e5e0d7] shadow-sm overflow-hidden mb-12">
+      
+      <!-- شريط الفلاتر والبحث -->
+      <div class="p-5 border-b border-[#f2ede4] flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#fcfbf9]">
+        
+        <!-- أزرار فلاتر الحالة -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" id="status-filter-pills">
+          <button onclick="filterOrdersByStatus('all', this)" class="badge-craft active px-3.5 py-1.5 text-xs font-bold transition-all shrink-0">
+            <span>الكل</span>
+            <span id="tab-count-all" class="ml-1 opacity-75 font-display">(0)</span>
+          </button>
+          <button onclick="filterOrdersByStatus('pending', this)" class="badge-craft px-3.5 py-1.5 text-xs font-bold transition-all shrink-0">
+            <span>قيد الانتظار</span>
+            <span id="tab-count-pending" class="ml-1 opacity-75 font-display">(0)</span>
+          </button>
+          <button onclick="filterOrdersByStatus('processing', this)" class="badge-craft px-3.5 py-1.5 text-xs font-bold transition-all shrink-0">
+            <span>بالورشة</span>
+            <span id="tab-count-processing" class="ml-1 opacity-75 font-display">(0)</span>
+          </button>
+          <button onclick="filterOrdersByStatus('shipped', this)" class="badge-craft px-3.5 py-1.5 text-xs font-bold transition-all shrink-0">
+            <span>جاري الشحن</span>
+            <span id="tab-count-shipped" class="ml-1 opacity-75 font-display">(0)</span>
+          </button>
+          <button onclick="filterOrdersByStatus('delivered', this)" class="badge-craft px-3.5 py-1.5 text-xs font-bold transition-all shrink-0">
+            <span>تم التوصيل</span>
+            <span id="tab-count-delivered" class="ml-1 opacity-75 font-display">(0)</span>
+          </button>
+        </div>
+
+        <!-- حقل البحث اللحظي -->
+        <div class="relative w-full md:w-80">
           <input 
             type="text" 
             id="orders-search" 
             oninput="searchOrders(this.value)" 
-            placeholder="ابحث برقم الطلب، الاسم، أو الهاتف..." 
-            class="w-full bg-[#f5f3ef] text-xs px-3 py-2 rounded-lg border border-[#e8e4dc] text-right focus:outline-none focus:border-[#98440b]" 
+            placeholder="ابحث برقم الطلب، العميل، الهاتف، أو المدينة..." 
+            class="w-full bg-white text-xs px-3.5 py-2.5 rounded-xl border border-[#e5e0d7] text-right focus:outline-none focus:ring-1 focus:ring-[#98440b] focus:border-[#98440b] transition-all shadow-2xs" 
           />
-          <span class="material-symbols-outlined absolute left-2.5 top-2 text-gray-400 text-[18px]">search</span>
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-[18px]">search</span>
         </div>
 
       </div>
@@ -104,43 +317,152 @@
       <!-- جدول الطلبات الفعلي -->
       <div class="overflow-x-auto">
         <table class="w-full text-right text-xs">
-          <thead class="bg-[#fbf9f5] border-b border-[#e8e4dc] text-gray-600 font-bold">
+          <thead class="bg-[#f7f5f0] border-b border-[#e5e0d7] text-[#55433a] font-bold">
             <tr>
-              <th class="p-3.5">رقم الطلب</th>
-              <th class="p-3.5">التاريخ والوقت</th>
-              <th class="p-3.5">العميل والهاتف</th>
-              <th class="p-3.5">القطع المطلوبة والتخصيص</th>
-              <th class="p-3.5">وسيلة الدفع</th>
-              <th class="p-3.5">الإجمالي</th>
-              <th class="p-3.5">حالة الطلب</th>
-              <th class="p-3.5 text-center">الإجراءات</th>
+              <th class="p-4 whitespace-nowrap">رقم الطلب</th>
+              <th class="p-4 whitespace-nowrap">التاريخ</th>
+              <th class="p-4">العميل والمحافظة</th>
+              <th class="p-4">القطع المطلوبة والتخصيص الحرفي</th>
+              <th class="p-4 whitespace-nowrap">وسيلة الدفع</th>
+              <th class="p-4 whitespace-nowrap">الإجمالي</th>
+              <th class="p-4 whitespace-nowrap">حالة الطلب</th>
+              <th class="p-4 text-center whitespace-nowrap">الإجراءات</th>
             </tr>
           </thead>
-          <tbody id="orders-table-body" class="divide-y divide-[#f0ede6]"></tbody>
+          <tbody id="orders-table-body" class="divide-y divide-[#f2ede4]">
+            <!-- يتولد برمجياً عبر loadOrders() -->
+          </tbody>
         </table>
       </div>
 
-      <!-- حالة عدم وجود طلبات -->
-      <div id="orders-empty" class="p-12 text-center text-gray-500" style="display: none;">
-        <span class="material-symbols-outlined text-4xl text-gray-300 mb-2">inbox</span>
-        <h4 class="font-bold text-sm text-gray-700">لا توجد طلبات مسجلة حتى الآن</h4>
-        <p class="text-xs text-gray-500 mt-1">قم بإتمام طلب تجريبي من صفحة الدفع أو اضغط "إضافة طلبات تجريبية" بالأعلى</p>
+      <!-- حالة الجدول الفارغ -->
+      <div id="orders-empty" class="p-16 text-center text-gray-500" style="display: none;">
+        <div class="w-16 h-16 rounded-full bg-[#ffdbca] text-[#98440b] mx-auto flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-3xl">inbox</span>
+        </div>
+        <h4 class="font-bold text-base text-[#1b1c1a]">لا توجد طلبات تطابق هذا البحث</h4>
+        <p class="text-xs text-gray-500 mt-1 max-w-sm mx-auto">جرب تغيير حالة الفلتر أو إضافة طلب جديد يدوياً أو استخدام زر العينات التجريبية بالأعلى.</p>
+        <button onclick="seedSampleOrders()" class="btn-primary mt-4 text-xs py-2 px-5">إضافة طلبات تجريبية الآن</button>
       </div>
 
     </div>
 
   </main>
 
-  <!-- نافذة عرض تفاصيل الطلب الكاملة (Order Detail Modal) -->
+  <!-- ==================== 6. نافذة التفاصيل وبوليصة الشحن (Order Modal) ==================== -->
   <div id="order-detail-modal" class="modal-overlay" onclick="if(event.target === this) closeOrderDetailModal()">
-    <div id="order-detail-content" class="modal-content max-w-lg p-6"></div>
+    <div id="order-detail-content" class="modal-content max-w-xl p-6 sm:p-8"></div>
   </div>
 
+  <!-- ==================== 7. نافذة إنشاء طلب يدوي جديد (New Manual Order Modal) ==================== -->
+  <div id="new-order-modal" class="modal-overlay" onclick="if(event.target === this) closeNewOrderModal()">
+    <div class="modal-content max-w-xl p-6 sm:p-8 text-right">
+      <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#e8e4dc]">
+        <div>
+          <h3 class="font-bold text-lg text-[#1b1c1a]">تسجيل طلب يدوي جديد (هاتف / واتساب)</h3>
+          <p class="text-xs text-gray-500">أدخل بيانات العميل والقطع المطلوبة لحفظ الطلب في النظام</p>
+        </div>
+        <button onclick="closeNewOrderModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <form onsubmit="handleCreateManualOrder(event)" class="space-y-4 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">اسم العميل *</label>
+            <input type="text" id="manual-name" required placeholder="مثال: منى الكردي" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none" />
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">رقم الهاتف *</label>
+            <input type="tel" id="manual-phone" required placeholder="010XXXXXXXX" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none text-left" dir="ltr" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">المحافظة *</label>
+            <select id="manual-gov" required class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none bg-white">
+              <option value="القاهرة">القاهرة</option>
+              <option value="الجيزة">الجيزة</option>
+              <option value="الإسكندرية">الإسكندرية</option>
+              <option value="الدقهلية">الدقهلية</option>
+              <option value="البحيرة">البحيرة</option>
+              <option value="الشرقية">الشرقية</option>
+              <option value="الغربية">الغربية</option>
+              <option value="المنوفية">المنوفية</option>
+              <option value="القليوبية">القليوبية</option>
+              <option value="أخرى">محافظة أخرى</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">المنطقة / الحي *</label>
+            <input type="text" id="manual-district" required placeholder="مثال: المعادي / النزهة" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">العنوان التفصيلي *</label>
+          <input type="text" id="manual-address" required placeholder="الشارع، رقم العمارة، الشقة أو تفاصيل المعلم الشهير" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">اختر المنتج من الكتالوج *</label>
+            <select id="manual-product" required class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none bg-white">
+              <!-- يتعبأ برمجياً -->
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">الكمية *</label>
+            <input type="number" id="manual-qty" min="1" max="20" value="1" required class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">التخصيص الحرفي (اسم / لون / مقاس)</label>
+          <input type="text" id="manual-custom" placeholder="مثال: تطريز اسم: نور 2026 بخيط ذهبي" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">طريقة الدفع *</label>
+            <select id="manual-payment" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none bg-white">
+              <option value="cod">نقداً عند الاستلام (COD)</option>
+              <option value="instapay">تحويل إنستاباي (InstaPay)</option>
+              <option value="wallets">محافظ إلكترونية كاش</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">حالة الطلب المبدئية *</label>
+            <select id="manual-status" class="w-full p-2.5 rounded-lg border border-[#e5e0d7] focus:border-[#98440b] outline-none bg-white">
+              <option value="pending">قيد الانتظار</option>
+              <option value="processing" selected>قيد التجهيز بالورشة</option>
+              <option value="shipped">جاري الشحن</option>
+              <option value="delivered">تم التوصيل</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-[#e8e4dc] flex items-center justify-end gap-2">
+          <button type="button" onclick="closeNewOrderModal()" class="px-4 py-2 rounded-xl border border-gray-300 font-bold text-gray-600">إلغاء</button>
+          <button type="submit" class="btn-primary py-2 px-6 text-xs">حفظ الطلب وتأكيده</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- بيانات الكتالوج واللوحة -->
   <script src="data.js"></script>
   <script>
     let allOrders = [];
     let currentStatusFilter = 'all';
     let currentSearchTerm = '';
+
+    // إعداد تاريخ اليوم
+    document.getElementById('current-date-badge').textContent = new Date().toLocaleDateString('ar-EG', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
 
     function loadOrders() {
       try {
@@ -164,20 +486,39 @@
     }
 
     function renderDashboard() {
-      // 1. حساب الإحصائيات
-      const totalRevenue = allOrders
-        .filter(o => o.status !== 'cancelled')
-        .reduce((sum, o) => sum + (o.totals?.total || 0), 0);
+      // 1. حساب الإحصائيات العامة
+      const validOrders = allOrders.filter(o => o.status !== 'cancelled');
+      const totalRevenue = validOrders.reduce((sum, o) => sum + (o.totals?.total || 0), 0);
       const ordersCount = allOrders.length;
       const pendingCount = allOrders.filter(o => o.status === 'pending' || o.status === 'processing').length;
+      const deliveredCount = allOrders.filter(o => o.status === 'delivered').length;
+      const shippedCount = allOrders.filter(o => o.status === 'shipped').length;
       const avgOrder = ordersCount > 0 ? Math.round(totalRevenue / ordersCount) : 0;
+      const completionRate = ordersCount > 0 ? Math.round((deliveredCount / ordersCount) * 100) : 0;
 
       document.getElementById('stat-revenue').textContent = `${totalRevenue.toLocaleString('ar-EG')} ج.م`;
       document.getElementById('stat-orders-count').textContent = ordersCount;
       document.getElementById('stat-pending-count').textContent = pendingCount;
       document.getElementById('stat-avg-order').textContent = `${avgOrder.toLocaleString('ar-EG')} ج.م`;
+      document.getElementById('stat-completed-ratio').textContent = `${completionRate}% نسبة الإنجاز`;
 
-      // 2. تصفية وعرض الجدول
+      // 2. تحديث أرقام خط مسار الورشة
+      document.getElementById('pipe-pending-count').textContent = allOrders.filter(o => o.status === 'pending').length;
+      document.getElementById('pipe-processing-count').textContent = allOrders.filter(o => o.status === 'processing').length;
+      document.getElementById('pipe-shipped-count').textContent = shippedCount;
+      document.getElementById('pipe-delivered-count').textContent = deliveredCount;
+
+      // 3. تحديث أعداد أزرار الفلترة
+      document.getElementById('tab-count-all').textContent = `(${ordersCount})`;
+      document.getElementById('tab-count-pending').textContent = `(${allOrders.filter(o => o.status === 'pending').length})`;
+      document.getElementById('tab-count-processing').textContent = `(${allOrders.filter(o => o.status === 'processing').length})`;
+      document.getElementById('tab-count-shipped').textContent = `(${shippedCount})`;
+      document.getElementById('tab-count-delivered').textContent = `(${deliveredCount})`;
+
+      // 4. بناء شريط توزيع الحرف اليدوية
+      renderCraftBreakdown();
+
+      // 5. تصفية وعرض جدول الطلبات
       let filtered = [...allOrders];
 
       if (currentStatusFilter !== 'all') {
@@ -189,7 +530,9 @@
         filtered = filtered.filter(o => 
           (o.orderNumber || '').toLowerCase().includes(q) ||
           (o.customer?.name || '').toLowerCase().includes(q) ||
-          (o.customer?.phone || '').includes(q)
+          (o.customer?.phone || '').includes(q) ||
+          (o.customer?.governorate || '').toLowerCase().includes(q) ||
+          (o.customer?.district || '').toLowerCase().includes(q)
         );
       }
 
@@ -207,47 +550,90 @@
           });
 
           const statusBadge = getStatusBadge(order.status);
-          const paymentLabel = order.payment?.method === 'cod' ? 'نقداً عند الاستلام' : 
-                               order.payment?.method === 'instapay' ? 'إنستاباي' : 'محفظة كاش';
+          const paymentInfo = getPaymentDisplay(order.payment?.method);
 
           const itemsSummary = (order.items || []).map(i => `
-            <div>
-              <strong>${i.name}</strong> × ${i.quantity}
-              ${i.customNote ? `<span class="text-[#98440b] block text-[10px]">تخصيص: ${i.customNote}</span>` : ''}
+            <div class="mb-1.5 last:mb-0">
+              <span class="font-bold text-[#1b1c1a]">${i.name}</span>
+              <span class="text-gray-500 font-display"> × ${i.quantity}</span>
+              ${i.customNote ? `<div class="inline-flex items-center gap-1 text-[11px] text-[#98440b] font-bold bg-[#ffdbca]/40 px-2 py-0.5 rounded-md mt-0.5"><span class="material-symbols-outlined text-[13px]">edit_note</span><span>تخصيص: ${i.customNote}</span></div>` : ''}
             </div>
           `).join('');
 
+          const cleanPhone = (order.customer?.phone || '').replace(/[^0-9]/g, '');
+
           return `
-            <tr class="hover:bg-[#fbf9f5] transition-colors">
-              <td class="p-3.5 font-bold font-display text-[#98440b]">${order.orderNumber}</td>
-              <td class="p-3.5 text-gray-500 whitespace-nowrap">${dateStr}</td>
-              <td class="p-3.5">
-                <strong class="text-[#1b1c1a] block">${order.customer?.name || 'عميل'}</strong>
-                <a href="https://wa.me/2${order.customer?.phone}" target="_blank" class="text-[11px] text-[#98440b] hover:underline flex items-center gap-1">
-                  <span>${order.customer?.phone}</span>
-                  <span class="material-symbols-outlined text-[13px]">chat</span>
-                </a>
-                <span class="text-[10px] text-gray-400 block">${order.customer?.governorate || ''} - ${order.customer?.district || ''}</span>
+            <tr class="hover:bg-[#fbf9f5] transition-colors group">
+              <!-- رقم الطلب -->
+              <td class="p-4 whitespace-nowrap">
+                <div class="flex items-center gap-1.5 font-bold font-display text-sm text-[#98440b]">
+                  <span>${order.orderNumber}</span>
+                  <button onclick="copyToClipboard('${order.orderNumber}')" class="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-[#98440b] transition-opacity" title="نسخ رقم الطلب">
+                    <span class="material-symbols-outlined text-[15px]">content_copy</span>
+                  </button>
+                </div>
               </td>
-              <td class="p-3.5 max-w-xs">${itemsSummary}</td>
-              <td class="p-3.5 text-gray-700 font-semibold">${paymentLabel}</td>
-              <td class="p-3.5 font-bold text-sm text-[#1b1c1a] whitespace-nowrap">${(order.totals?.total || 0).toLocaleString('ar-EG')} ج.م</td>
-              <td class="p-3.5 whitespace-nowrap">
-                <select onchange="updateOrderStatus('${order.id}', this.value)" class="text-xs font-bold rounded-lg px-2 py-1 border border-[#e8e4dc] cursor-pointer ${statusBadge.color}">
-                  <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>قيد الانتظار</option>
-                  <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>قيد التجهيز بالورشة</option>
-                  <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>جاري الشحن</option>
-                  <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>تم التوصيل</option>
-                  <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>ملغي</option>
+
+              <!-- التاريخ -->
+              <td class="p-4 text-gray-500 whitespace-nowrap font-medium">${dateStr}</td>
+
+              <!-- العميل والمحافظة -->
+              <td class="p-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-full bg-[#ffdbca] text-[#98440b] font-bold flex items-center justify-center shrink-0 text-xs">
+                    ${(order.customer?.name || 'ع').charAt(0)}
+                  </div>
+                  <div>
+                    <strong class="text-[#1b1c1a] block font-bold leading-tight">${order.customer?.name || 'عميل'}</strong>
+                    <div class="flex items-center gap-2 mt-0.5">
+                      <a href="https://wa.me/2${cleanPhone}" target="_blank" class="text-[11px] text-emerald-700 hover:underline inline-flex items-center gap-0.5 font-semibold">
+                        <span>${order.customer?.phone || ''}</span>
+                        <span class="material-symbols-outlined text-[13px]">chat</span>
+                      </a>
+                      <span class="text-[10px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded font-medium">${order.customer?.governorate || 'مصر'}</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+
+              <!-- المنتجات والتخصيص -->
+              <td class="p-4 max-w-xs">${itemsSummary}</td>
+
+              <!-- وسيلة الدفع -->
+              <td class="p-4 whitespace-nowrap">
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold ${paymentInfo.color}">
+                  <span class="material-symbols-outlined text-[15px]">${paymentInfo.icon}</span>
+                  <span>${paymentInfo.label}</span>
+                </span>
+              </td>
+
+              <!-- الإجمالي -->
+              <td class="p-4 whitespace-nowrap">
+                <strong class="font-bold text-sm text-[#98440b] font-display">${(order.totals?.total || 0).toLocaleString('ar-EG')}</strong>
+                <span class="text-[11px] text-gray-500"> ج.م</span>
+              </td>
+
+              <!-- حالة الطلب التفاعلية -->
+              <td class="p-4 whitespace-nowrap">
+                <select onchange="updateOrderStatus('${order.id}', this.value)" class="text-xs font-bold rounded-xl px-2.5 py-1.5 border border-[#e5e0d7] cursor-pointer shadow-2xs transition-all ${statusBadge.color}">
+                  <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>⏳ قيد الانتظار</option>
+                  <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>🧵 قيد التجهيز بالورشة</option>
+                  <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>🚚 جاري الشحن</option>
+                  <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>✅ تم التوصيل</option>
+                  <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>❌ ملغي</option>
                 </select>
               </td>
-              <td class="p-3.5 text-center whitespace-nowrap">
-                <button onclick="viewOrderDetail('${order.id}')" class="p-1.5 rounded-lg bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#98440b]" title="تفاصيل كاملة">
-                  <span class="material-symbols-outlined text-[18px]">visibility</span>
-                </button>
-                <button onclick="deleteOrder('${order.id}')" class="p-1.5 rounded-lg bg-[#f5f3ef] hover:bg-red-100 text-gray-400 hover:text-red-600" title="حذف الطلب">
-                  <span class="material-symbols-outlined text-[18px]">delete</span>
-                </button>
+
+              <!-- الإجراءات -->
+              <td class="p-4 text-center whitespace-nowrap">
+                <div class="flex items-center justify-center gap-1.5">
+                  <button onclick="viewOrderDetail('${order.id}')" class="p-2 rounded-xl bg-[#f5f3ef] hover:bg-[#eae8e4] text-[#98440b] transition-colors" title="عرض البوليصة والتفاصيل الكاملة">
+                    <span class="material-symbols-outlined text-[18px]">receipt_long</span>
+                  </button>
+                  <button onclick="deleteOrder('${order.id}')" class="p-2 rounded-xl bg-[#f5f3ef] hover:bg-red-50 text-gray-400 hover:text-red-600 transition-colors" title="حذف الطلب">
+                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                  </button>
+                </div>
               </td>
             </tr>
           `;
@@ -255,14 +641,63 @@
       }
     }
 
+    function renderCraftBreakdown() {
+      const craftCounts = {};
+      const craftNames = {
+        embroidery: 'تطريز يدوي وطارات',
+        crochet: 'كروشيه وتريكو',
+        gift_hoops: 'طارات ومكرميات',
+        beaded: 'إكسسوارات خرز',
+        resin: 'فن الريزن والديكور'
+      };
+
+      allOrders.forEach(o => {
+        (o.items || []).forEach(item => {
+          const product = (window.PRODUCTS || []).find(p => p.id === item.productId);
+          const craftKey = product ? product.craftType : 'embroidery';
+          craftCounts[craftKey] = (craftCounts[craftKey] || 0) + item.quantity;
+        });
+      });
+
+      const totalItems = Object.values(craftCounts).reduce((a, b) => a + b, 0) || 1;
+      const listEl = document.getElementById('craft-breakdown-list');
+
+      const itemsHtml = Object.keys(craftNames).map(key => {
+        const count = craftCounts[key] || 0;
+        const percent = Math.round((count / totalItems) * 100);
+        return `
+          <div>
+            <div class="flex justify-between text-xs mb-1 font-semibold">
+              <span class="text-gray-700">${craftNames[key]}</span>
+              <span class="text-[#98440b] font-display font-bold">${count} قطعة (${percent}%)</span>
+            </div>
+            <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-gradient-to-l from-[#98440b] to-[#c86321] rounded-full transition-all duration-500" style="width: ${percent}%;"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      listEl.innerHTML = itemsHtml;
+    }
+
     function getStatusBadge(status) {
       switch (status) {
-        case 'pending': return { color: 'bg-amber-50 text-amber-800' };
-        case 'processing': return { color: 'bg-blue-50 text-blue-800' };
-        case 'shipped': return { color: 'bg-purple-50 text-purple-800' };
-        case 'delivered': return { color: 'bg-emerald-50 text-emerald-800' };
-        case 'cancelled': return { color: 'bg-red-50 text-red-800' };
-        default: return { color: 'bg-gray-50 text-gray-800' };
+        case 'pending': return { color: 'bg-amber-50 text-amber-900 border-amber-200' };
+        case 'processing': return { color: 'bg-blue-50 text-blue-900 border-blue-200' };
+        case 'shipped': return { color: 'bg-purple-50 text-purple-900 border-purple-200' };
+        case 'delivered': return { color: 'bg-emerald-50 text-emerald-900 border-emerald-200' };
+        case 'cancelled': return { color: 'bg-red-50 text-red-900 border-red-200' };
+        default: return { color: 'bg-gray-50 text-gray-800 border-gray-200' };
+      }
+    }
+
+    function getPaymentDisplay(method) {
+      switch (method) {
+        case 'cod': return { label: 'دفع عند الاستلام', icon: 'local_atm', color: 'text-emerald-700' };
+        case 'instapay': return { label: 'إنستاباي فوري', icon: 'bolt', color: 'text-purple-700' };
+        case 'wallets': return { label: 'محفظة إلكترونية', icon: 'smartphone', color: 'text-blue-700' };
+        default: return { label: 'دفع نقدي', icon: 'payments', color: 'text-gray-700' };
       }
     }
 
@@ -275,7 +710,7 @@
     }
 
     function deleteOrder(orderId) {
-      if (confirm('هل أنت متأكد من رغبتك في حذف هذا الطلب نهائياً؟')) {
+      if (confirm('هل أنت متأكد من رغبتك في حذف هذا الطلب نهائياً من سجلات الأتيليه؟')) {
         allOrders = allOrders.filter(o => o.id !== orderId);
         saveOrders();
       }
@@ -283,7 +718,7 @@
 
     function filterOrdersByStatus(status, btn) {
       currentStatusFilter = status;
-      document.querySelectorAll('.badge-craft').forEach(b => b.classList.remove('active', 'bg-[#98440b]', 'text-white'));
+      document.querySelectorAll('#status-filter-pills .badge-craft').forEach(b => b.classList.remove('active', 'bg-[#98440b]', 'text-white'));
       if (btn) btn.classList.add('active', 'bg-[#98440b]', 'text-white');
       renderDashboard();
     }
@@ -293,6 +728,13 @@
       renderDashboard();
     }
 
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`تم نسخ رقم الطلب: ${text}`);
+      }).catch(() => {});
+    }
+
+    // ==================== تفاصيل وبوليصة الطلب ====================
     function viewOrderDetail(orderId) {
       const order = allOrders.find(o => o.id === orderId);
       if (!order) return;
@@ -300,46 +742,122 @@
       const modal = document.getElementById('order-detail-modal');
       const content = document.getElementById('order-detail-content');
 
+      const dateStr = new Date(order.createdAt).toLocaleDateString('ar-EG', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      const cleanPhone = (order.customer?.phone || '').replace(/[^0-9]/g, '');
+
       content.innerHTML = `
-        <div class="text-right">
-          <div class="flex justify-between items-center mb-4 pb-2 border-b border-[#e8e4dc]">
-            <h3 class="font-bold text-base text-[#1b1c1a]">تفاصيل الطلب: ${order.orderNumber}</h3>
-            <button onclick="closeOrderDetailModal()" class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
+        <div class="text-right" id="printable-waybill">
+          
+          <!-- رأس البوليصة -->
+          <div class="flex items-center justify-between pb-4 mb-4 border-b-2 border-[#98440b]">
+            <div>
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-[#98440b] text-white flex items-center justify-center font-bold text-base font-display">غ</div>
+                <h3 class="font-display font-extrabold text-xl text-[#98440b]">غُـرْزَة | بوليصة الشحن والتسليم</h3>
+              </div>
+              <span class="text-[11px] text-gray-500 font-medium">مشغولات يدوية مصرية أصيلة • ورش المعادي والقاهرة</span>
+            </div>
+            <button onclick="closeOrderDetailModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 print:hidden">
               <span class="material-symbols-outlined text-[18px]">close</span>
             </button>
           </div>
 
-          <div class="space-y-3 text-xs text-gray-700 mb-4">
-            <p><strong>اسم العميل:</strong> ${order.customer?.name}</p>
-            <p><strong>الهاتف:</strong> ${order.customer?.phone}</p>
-            <p><strong>العنوان الكامل:</strong> ${order.customer?.governorate}، ${order.customer?.district}، ${order.customer?.address}</p>
-            ${order.customer?.notes ? `<p><strong>ملاحظات التسليم:</strong> ${order.customer?.notes}</p>` : ''}
-            <p><strong>وسيلة الدفع:</strong> ${order.payment?.method}</p>
+          <!-- بطاقة رقم الطلب والتاريخ -->
+          <div class="bg-[#fcfbf9] p-3.5 rounded-xl border border-[#e5e0d7] mb-4 flex justify-between items-center text-xs">
+            <div>
+              <span class="text-gray-500 block">رقم الإشعار / الطلب:</span>
+              <strong class="font-display font-bold text-base text-[#98440b]">${order.orderNumber}</strong>
+            </div>
+            <div class="text-left">
+              <span class="text-gray-500 block">تاريخ التسجيل:</span>
+              <strong class="font-semibold text-gray-800">${dateStr}</strong>
+            </div>
           </div>
 
-          <div class="bg-[#f5f3ef] p-3 rounded-xl mb-4 text-xs">
-            <strong class="block mb-2 text-[#1b1c1a]">المنتجات:</strong>
-            <div class="space-y-2">
+          <!-- بيانات العميل والتوصيل -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs mb-4">
+            <div class="bg-white p-3.5 rounded-xl border border-[#e5e0d7]">
+              <strong class="text-gray-400 text-[10px] uppercase block mb-1">بيانات المستلم:</strong>
+              <p class="font-bold text-sm text-[#1b1c1a] mb-1">${order.customer?.name}</p>
+              <p class="text-gray-700 flex items-center gap-1 font-semibold">
+                <span class="material-symbols-outlined text-[15px] text-emerald-600">call</span>
+                <span dir="ltr">${order.customer?.phone}</span>
+              </p>
+              ${order.customer?.email ? `<p class="text-gray-500 mt-0.5">${order.customer?.email}</p>` : ''}
+            </div>
+
+            <div class="bg-white p-3.5 rounded-xl border border-[#e5e0d7]">
+              <strong class="text-gray-400 text-[10px] uppercase block mb-1">عنوان التوصيل:</strong>
+              <p class="font-bold text-gray-800 mb-0.5">${order.customer?.governorate} — ${order.customer?.district}</p>
+              <p class="text-gray-600 leading-relaxed">${order.customer?.address}</p>
+              ${order.customer?.notes ? `<p class="text-[#98440b] font-bold mt-1.5 text-[11px]">ملاحظة: ${order.customer?.notes}</p>` : ''}
+            </div>
+          </div>
+
+          <!-- قائمة القطع اليدوية -->
+          <div class="bg-[#f5f3ef] p-4 rounded-xl mb-4 text-xs">
+            <strong class="block mb-2 text-sm text-[#1b1c1a] font-bold">القطع والمشغولات اليدوية المطلوبة:</strong>
+            <div class="space-y-2.5">
               ${(order.items || []).map(i => `
-                <div class="flex justify-between items-center pb-1 border-b border-gray-200">
+                <div class="flex justify-between items-start pb-2 border-b border-gray-200 last:border-0 last:pb-0">
                   <div>
-                    <span>${i.name} × ${i.quantity}</span>
-                    ${i.customNote ? `<span class="text-[#98440b] block text-[11px]">تخصيص: ${i.customNote}</span>` : ''}
+                    <div class="font-bold text-sm text-[#1b1c1a]">${i.name}</div>
+                    <div class="text-gray-500 font-display mt-0.5">الكمية: ${i.quantity} × ${i.price.toLocaleString('ar-EG')} ج.م</div>
+                    ${i.customNote ? `<div class="text-[#98440b] font-bold text-[11px] mt-1 bg-white p-1 rounded border border-[#ffdbca]">✨ التخصيص المطلوب: ${i.customNote}</div>` : ''}
                   </div>
-                  <strong>${(i.price * i.quantity).toLocaleString('ar-EG')} ج.م</strong>
+                  <strong class="font-display font-extrabold text-sm text-[#98440b]">${(i.price * i.quantity).toLocaleString('ar-EG')} ج.م</strong>
                 </div>
               `).join('')}
             </div>
-            <div class="pt-2 mt-2 flex justify-between font-bold text-sm text-[#98440b]">
-              <span>الإجمالي الكلي:</span>
-              <span>${(order.totals?.total || 0).toLocaleString('ar-EG')} ج.م</span>
+
+            <!-- ملخص الحساب -->
+            <div class="mt-3 pt-3 border-t-2 border-gray-300 space-y-1 text-xs">
+              <div class="flex justify-between text-gray-600">
+                <span>المجموع الفرعي:</span>
+                <span class="font-display">${(order.totals?.subtotal || order.totals?.total || 0).toLocaleString('ar-EG')} ج.م</span>
+              </div>
+              ${order.totals?.discount ? `
+                <div class="flex justify-between text-emerald-700 font-semibold">
+                  <span>الخصم المطبق:</span>
+                  <span class="font-display">-${order.totals.discount.toLocaleString('ar-EG')} ج.م</span>
+                </div>
+              ` : ''}
+              <div class="flex justify-between text-gray-600">
+                <span>رسوم الشحن والتوصيل:</span>
+                <span class="font-display">${order.totals?.shipping === 0 ? 'مجاني' : (order.totals?.shipping || 0) + ' ج.م'}</span>
+              </div>
+              <div class="flex justify-between font-extrabold text-base text-[#98440b] pt-1 border-t border-gray-200">
+                <span>المبلغ المطلوب تحصيله:</span>
+                <span class="font-display">${(order.totals?.total || 0).toLocaleString('ar-EG')} ج.م</span>
+              </div>
             </div>
           </div>
 
-          <button onclick="window.print()" class="w-full btn-outline py-2 text-xs flex items-center justify-center gap-1">
-            <span class="material-symbols-outlined text-[16px]">print</span>
-            <span>طباعة بوليصة الطلب</span>
-          </button>
+          <!-- توقيع الاستلام وخدمة العملاء -->
+          <div class="p-3 bg-white border border-[#e5e0d7] rounded-xl text-[11px] text-gray-500 flex justify-between items-center mb-5">
+            <div>
+              <span>وسيلة الدفع: <strong>${order.payment?.method === 'cod' ? 'نقداً عند الاستلام' : order.payment?.method === 'instapay' ? 'إنستاباي' : 'محفظة كاش'}</strong></span>
+            </div>
+            <div class="text-left">
+              <span>توقيع العميل بالاستلام: _______________</span>
+            </div>
+          </div>
+
+          <!-- أزرار الإجراءات -->
+          <div class="flex items-center gap-2 print:hidden">
+            <button onclick="window.print()" class="flex-1 btn-primary py-2.5 text-xs flex items-center justify-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-[17px]">print</span>
+              <span>طباعة البوليصة للمندوب</span>
+            </button>
+            <a href="https://wa.me/2${cleanPhone}" target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1 transition-colors">
+              <span class="material-symbols-outlined text-[17px]">chat</span>
+              <span>واتساب للعميل</span>
+            </a>
+          </div>
+
         </div>
       `;
 
@@ -351,7 +869,112 @@
       if (modal) modal.classList.remove('active');
     }
 
-    // توليد طلبات عينة للاختبار الأكاديمي السريع
+    // ==================== تسجيل طلب يدوي ====================
+    function openNewOrderModal() {
+      const select = document.getElementById('manual-product');
+      const products = window.PRODUCTS || [];
+      select.innerHTML = products.map(p => `
+        <option value="${p.id}" data-price="${p.price}">${p.name} (${p.price} ج.م)</option>
+      `).join('');
+
+      document.getElementById('new-order-modal').classList.add('active');
+    }
+
+    function closeNewOrderModal() {
+      document.getElementById('new-order-modal').classList.remove('active');
+    }
+
+    function handleCreateManualOrder(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('manual-name').value.trim();
+      const phone = document.getElementById('manual-phone').value.trim();
+      const gov = document.getElementById('manual-gov').value;
+      const district = document.getElementById('manual-district').value.trim();
+      const address = document.getElementById('manual-address').value.trim();
+      const productId = document.getElementById('manual-product').value;
+      const qty = parseInt(document.getElementById('manual-qty').value, 10) || 1;
+      const customNote = document.getElementById('manual-custom').value.trim();
+      const paymentMethod = document.getElementById('manual-payment').value;
+      const status = document.getElementById('manual-status').value;
+
+      const product = (window.PRODUCTS || []).find(p => p.id === productId);
+      const price = product ? product.price : 500;
+      const subtotal = price * qty;
+      const shipping = subtotal >= 1500 ? 0 : 50;
+      const total = subtotal + shipping;
+
+      const newOrder = {
+        id: 'ord_man_' + Date.now(),
+        orderNumber: 'ORD-' + Math.floor(10000 + Math.random() * 90000),
+        status: status,
+        createdAt: new Date().toISOString(),
+        customer: {
+          name: name,
+          phone: phone,
+          email: '',
+          governorate: gov,
+          district: district,
+          address: address,
+          notes: 'طلب مسجل يدوياً من لوحة التحكم'
+        },
+        payment: { method: paymentMethod },
+        items: [
+          {
+            productId: productId,
+            name: product ? product.name : 'قطعة يدوية',
+            price: price,
+            quantity: qty,
+            customNote: customNote
+          }
+        ],
+        totals: {
+          subtotal: subtotal,
+          discount: 0,
+          shipping: shipping,
+          total: total
+        }
+      };
+
+      allOrders.unshift(newOrder);
+      saveOrders();
+      closeNewOrderModal();
+      alert(`✅ تم حفظ الطلب بنجاح برقم: ${newOrder.orderNumber}`);
+    }
+
+    // ==================== تصدير CSV ====================
+    function exportOrdersToCSV() {
+      if (allOrders.length === 0) {
+        alert('لا توجد طلبات للتصدير حالياً.');
+        return;
+      }
+
+      let csv = '\uFEFFرقم الطلب,التاريخ,اسم العميل,رقم الهاتف,المحافظة,المنتجات,الإجمالي,وسيلة الدفع,الحالة\n';
+      allOrders.forEach(o => {
+        const date = new Date(o.createdAt).toLocaleDateString('ar-EG');
+        const items = (o.items || []).map(i => `${i.name} (x${i.quantity})`).join(' + ').replace(/,/g, ' ');
+        const row = [
+          o.orderNumber,
+          date,
+          `"${o.customer?.name || ''}"`,
+          `'${o.customer?.phone || ''}`,
+          `"${o.customer?.governorate || ''}"`,
+          `"${items}"`,
+          o.totals?.total || 0,
+          o.payment?.method || '',
+          o.status
+        ];
+        csv += row.join(',') + '\n';
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `طلبات_غرزة_${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+    }
+
+    // ==================== توليد طلبات نموذجية ====================
     function seedSampleOrders() {
       const sampleOrders = [
         {
@@ -366,7 +989,7 @@
             governorate: 'القاهرة',
             district: 'المعادي دجلة',
             address: 'شارع 206، عمارة 12، الدور الثالث',
-            notes: 'يرجى الاتصال قبل الوصول'
+            notes: 'يرجى الاتصال قبل الوصول بنصف ساعة'
           },
           payment: { method: 'cod' },
           items: [
@@ -378,42 +1001,62 @@
           id: 'ord_sample_2',
           orderNumber: 'ORD-54812',
           status: 'processing',
-          createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+          createdAt: new Date(Date.now() - 3600000 * 18).toISOString(),
           customer: {
             name: 'محمود عبد الفتاح',
             phone: '01234567890',
             email: 'mahmoud@example.com',
             governorate: 'الجيزة',
             district: 'الدقي',
-            address: 'شارع مصدق، عمارة 8',
-            notes: ''
+            address: 'شارع مصدق، عمارة 8 أمام بنك مصر',
+            notes: 'تطريز الخط العربي بلون كحلي وذهبي'
           },
           payment: { method: 'instapay' },
           items: [
-            { productId: 'gift-001', name: 'طارة مباركة المنزل: "اللهم بارك هذا البيت"', price: 850, quantity: 1, customNote: 'تطريز اسم: عائلة عبد الفتاح 2026' },
-            { productId: 'res-001', name: 'طقم كوسترات الريزن الرخامية', price: 490, quantity: 1, customNote: '' }
+            { productId: 'gift-001', name: 'طارة مباركة المنزل: "اللهم بارك هذا البيت"', price: 850, quantity: 1, customNote: 'عائلة عبد الفتاح 2026' },
+            { productId: 'res-001', name: 'طقم كوسترات الريزن الرخامية', price: 490, quantity: 1, customNote: 'حواف ورق ذهب' }
           ],
           totals: { subtotal: 1340, discount: 134, shipping: 50, total: 1256 }
         },
         {
           id: 'ord_sample_3',
+          orderNumber: 'ORD-76290',
+          status: 'shipped',
+          createdAt: new Date(Date.now() - 3600000 * 42).toISOString(),
+          customer: {
+            name: 'هدى عبد الرحمن المنشاوي',
+            phone: '01555667788',
+            email: 'hoda@example.com',
+            governorate: 'الإسكندرية',
+            district: 'جليم',
+            address: 'طريق الجيش، برج الشاطئ، شقة 14',
+            notes: 'تغليف هدايا مع كارت إهداء لطيف'
+          },
+          payment: { method: 'wallets' },
+          items: [
+            { productId: 'emb-001', name: 'طارة التطريز التراثية: ماكينة الخياطة والزهور', price: 650, quantity: 1, customNote: 'إهداء إلى ماما الحبيبة' }
+          ],
+          totals: { subtotal: 650, discount: 0, shipping: 60, total: 710 }
+        },
+        {
+          id: 'ord_sample_4',
           orderNumber: 'ORD-32910',
           status: 'delivered',
-          createdAt: new Date(Date.now() - 3600000 * 72).toISOString(),
+          createdAt: new Date(Date.now() - 3600000 * 80).toISOString(),
           customer: {
             name: 'نور إبراهيم',
             phone: '01198765432',
             email: 'nour@example.com',
-            governorate: 'الإسكندرية',
-            district: 'سموحة',
-            address: 'شارع فوزي معاذ',
+            governorate: 'القاهرة',
+            district: 'مصر الجديدة',
+            address: 'شارع الميرغني، ميدان الكوربة',
             notes: ''
           },
-          payment: { method: 'wallets' },
+          payment: { method: 'instapay' },
           items: [
             { productId: 'bead-001', name: 'مجموعة أساور ورود الديزي الصيفية', price: 180, quantity: 2, customNote: 'لون أصفر ووردي' }
           ],
-          totals: { subtotal: 360, discount: 0, shipping: 60, total: 420 }
+          totals: { subtotal: 360, discount: 0, shipping: 50, total: 410 }
         }
       ];
 
